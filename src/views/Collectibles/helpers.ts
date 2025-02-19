@@ -91,7 +91,7 @@ export const getBallerClaim = async (
   lotteryId?: string,
 ): Promise<NftClaim> => {
   const lotteryNftContract = getBunnySpecialLotteryContract()
-
+  /* Disable Baller for now
   try {
     const isWhitelisted = await lotteryNftContract.userWhitelistForNft3(account)
     if (isWhitelisted) {
@@ -112,5 +112,6 @@ export const getBallerClaim = async (
     console.error(`Failed to check whitelist for ${account}`, error)
     return NO_CLAIM
   }
+    */
   return NO_CLAIM
 }

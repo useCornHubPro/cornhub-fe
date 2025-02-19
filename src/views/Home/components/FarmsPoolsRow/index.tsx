@@ -88,7 +88,7 @@ const FarmsPoolsRow = () => {
                 // eslint-disable-next-line react/no-array-index-key
                 key={index}
                 title={topFarm?.lpSymbol}
-                percentage={topFarm?.apr + topFarm?.lpRewardsApr}
+                percentage={topFarm?.apr ?? 0 + topFarm?.lpRewardsApr ?? 0}
                 index={index}
                 visible={showFarms}
               />

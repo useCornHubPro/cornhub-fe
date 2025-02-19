@@ -13,7 +13,9 @@ const GlobalStyle = createGlobalStyle`
 	font-family: 'Kanit', sans-serif;
   }
   body {
-    background-color: ${({ theme }) => theme.colors.background};
+    background-image: ${({ theme }) =>
+      theme.isDark ? "url('images/backgrounds/bg-tile-dark.png')" : "url('/images/backgrounds/bg-tile-light.png')"};
+    animation: animatedBackground 45s ease-in-out infinite;
 
     img {
       height: auto;

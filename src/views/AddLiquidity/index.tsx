@@ -327,9 +327,7 @@ export default function AddLiquidity({
         <AppHeader
           title={t('Add Liquidity')}
           subtitle={t('Add liquidity to receive LP tokens')}
-          helper={t(
-            'Liquidity providers earn a 0.2% trading fee on all trades made for that token pair, proportional to their share of the liquidity pool.',
-          )}
+          helper={t('0% trading fees. Stake in CZB Farms to earn yield.')}
           backTo="/pool"
         />
         <CardBody>

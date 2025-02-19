@@ -3,6 +3,7 @@
 import { TokenList } from '@uniswap/token-lists'
 import schema from '@uniswap/token-lists/src/tokenlist.schema.json'
 import Ajv from 'ajv'
+import { PANCAKE_EXTENDED } from 'config/constants/lists'
 import contenthashToUri from './contenthashToUri'
 import { parseENSAddress } from './ENS/parseENSAddress'
 import uriToHttp from './uriToHttp'
@@ -57,7 +58,7 @@ export default async function getTokenList(
     }
 
     const json = await response.json()
-    if (!tokenListValidator(json)) {
+    if (!tokenListValidator(json) && listUrl !== PANCAKE_EXTENDED) {
       const validationErrors: string =
         tokenListValidator.errors?.reduce<string>((memo, error) => {
           const add = `${(error as any).dataPath} ${error.message ?? ''}`

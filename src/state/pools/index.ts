@@ -54,7 +54,8 @@ export const fetchPoolsPublicDataAsync = (currentBlock: number) => async (dispat
 
   const liveData = poolsConfig.map((pool) => {
     const blockLimit = blockLimits.find((entry) => entry.sousId === pool.sousId)
-    const totalStaking = totalStakings.find((entry) => entry.sousId === pool.sousId)
+    const totalStaking = new BigNumber(totalStakings.find((entry) => entry.sousId === pool.sousId).totalStaked.hex)
+
     const isPoolEndBlockExceeded = currentBlock > 0 && blockLimit ? currentBlock > Number(blockLimit.endBlock) : false
     const isPoolFinished = pool.isFinished || isPoolEndBlockExceeded
 
@@ -74,21 +75,21 @@ export const fetchPoolsPublicDataAsync = (currentBlock: number) => async (dispat
             pool.sousId,
             stakingTokenPrice,
             earningTokenPrice,
-            getBalanceNumber(new BigNumber(totalStaking.totalStaked), pool.stakingToken.decimals),
+            getBalanceNumber(totalStaking, pool.stakingToken.decimals),
             tokenPerSecond,
           )
         : 0
-
     return {
       ...blockLimit,
-      ...totalStaking,
+      sousId: pool.sousId,
+      totalStaking: totalStaking.toJSON(),
+      totalStaked: totalStaking.toJSON(),
       stakingTokenPrice,
       earningTokenPrice,
-      apr,
+      apr: apr.toNumber(),
       isFinished: isPoolFinished,
     }
   })
-
   dispatch(setPoolsPublicData(liveData))
 }
 
@@ -109,7 +110,6 @@ export const fetchPoolsStakingLimitsAsync = () => async (dispatch, getState) => 
       stakingLimit: stakingLimit.toJSON(),
     }
   })
-
   dispatch(setPoolsPublicData(stakingLimitData))
 }
 

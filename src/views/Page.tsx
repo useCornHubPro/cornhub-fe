@@ -14,12 +14,8 @@ const StyledPage = styled.div`
   min-height: calc(100vh - 64px);
   background: ${({ theme }) => theme.colors.gradients.bubblegum};
   background-image: ${({ theme }) =>
-    theme.isDark ? "url('images/backgrounds/bg-tile-dark.png')" : "url('images/backgrounds/bg-tile-light.png')"};
+    theme.isDark ? "url('images/backgrounds/bg-tile-dark.png')" : "url('/images/backgrounds/bg-tile-light.png')"};
   animation: animatedBackground 45s ease-in-out infinite;
-
-  ${({ theme }) => theme.mediaQueries.xs} {
-    background-size: auto;
-  }
 
   ${({ theme }) => theme.mediaQueries.sm} {
     padding: 24px;

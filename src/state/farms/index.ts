@@ -12,7 +12,6 @@ import {
   fetchFarmUserStakedBalances,
 } from './fetchFarmUser'
 import { fetchYtknPerSecond } from './fetchYtknPerSecond'
-import { fetchTotalAlloc } from './fetchTotalAlloc'
 import { FarmsState, Farm } from '../types'
 
 const noAccountFarmConfig = farmsConfig.map((farm) => ({
@@ -34,12 +33,10 @@ export const fetchFarmsPublicDataAsync = createAsyncThunk<Farm[], number[]>(
   'farms/fetchFarmsPublicDataAsync',
   async (pids) => {
     const chefYtknPerSecond = await fetchYtknPerSecond()
-    const totalAlloc = await fetchTotalAlloc()
     const farmsToFetch = farmsConfig.filter((farmConfig) => pids.includes(farmConfig.pid))
 
     // Add price helper farms
     const farmsWithPriceHelpers = farmsToFetch.concat(priceHelperLpsConfig)
-
     const farms = await fetchFarms(farmsWithPriceHelpers)
     const farmsWithPrices = await fetchFarmsPrices(farms)
 
@@ -49,7 +46,7 @@ export const fetchFarmsPublicDataAsync = createAsyncThunk<Farm[], number[]>(
     })
     const farmsWithYtknPerSecond = farmsWithoutHelperLps.map((farm: Farm) => {
       const ytknPerSecond = new BigNumber(farm.poolWeight).multipliedBy(chefYtknPerSecond)
-      return { ...farm, ytknPerSecond }
+      return { ...farm, ytknPerSecond: ytknPerSecond.toNumber() }
     })
     return farmsWithYtknPerSecond
   },

@@ -130,7 +130,7 @@ const RoiCalculatorFooter: React.FC<RoiCalculatorFooterProps> = ({
             {isFarm && (
               <li>
                 <Text fontSize="12px" textAlign="center" color="textSubtle" display="inline">
-                  {t('LP rewards: 0.2% trading fees, distributed proportionally among LP token holders.')}
+                  {t('LP rewards: 0% trading fees. Stake in CZB Farms to earn yield.')}
                 </Text>
               </li>
             )}

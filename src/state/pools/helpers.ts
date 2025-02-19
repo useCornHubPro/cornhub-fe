@@ -23,7 +23,6 @@ export const transformUserData = (userData: UserData) => {
 
 export const transformPool = (pool: Pool): Pool => {
   const { totalStaked, stakingLimit, userData, ...rest } = pool
-
   return {
     ...rest,
     userData: transformUserData(userData),

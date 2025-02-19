@@ -15,7 +15,8 @@
   },
   "resolutions": {
     "@types/react": "17.0.83",
-    "fork-ts-checker-webpack-plugin": "^6.5.3"
+    "fork-ts-checker-webpack-plugin": "^6.5.3",
+    "underscore": "=1.12.1"
   },
   "husky": {
     "hooks": {

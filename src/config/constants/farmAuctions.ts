@@ -236,7 +236,7 @@ export const whitelistedBidders: FarmAuctionBidderConfig[] = [
   {
     account: '0x88Dba2cF8911A80cc50A1B392b5fF6b47B930330',
     farmName: 'SFUND-BNB',
-    tokenAddress: '0x477bc8d23c634c154061869478bce96be6045d12',
+    tokenAddress: '0x477bC8d23c634C154061869478bce96BE6045D12',
     quoteToken: tokens.wbnb,
     tokenName: 'Seedify',
     projectSite: 'https://launchpad.seedify.fund/',

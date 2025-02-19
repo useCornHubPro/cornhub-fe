@@ -9,15 +9,26 @@ const getFarmFromTokenSymbol = (farms: Farm[], tokenSymbol: string, preferredQuo
   return filteredFarm
 }
 
-const getFarmBaseTokenPrice = (farm: Farm, quoteTokenFarm: Farm, bnbPriceBusd: BigNumber): BigNumber => {
+const getFarmBaseTokenPrice = (
+  farm: Farm,
+  quoteTokenFarm: Farm,
+  bnbPriceBusd: BigNumber,
+  czbCzusdPrice: BigNumber,
+): BigNumber => {
   const hasTokenPriceVsQuote = Boolean(farm.tokenPriceVsQuote)
-
   if (farm.quoteToken.symbol === 'BUSD') {
+    return hasTokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : BIG_ZERO
+  }
+
+  if (farm.quoteToken.symbol === 'CZUSD') {
     return hasTokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : BIG_ZERO
   }
 
   if (farm.quoteToken.symbol === 'wBNB') {
     return hasTokenPriceVsQuote ? bnbPriceBusd.times(farm.tokenPriceVsQuote) : BIG_ZERO
+  }
+  if (farm.quoteToken.symbol === 'CZB') {
+    return hasTokenPriceVsQuote ? czbCzusdPrice.times(farm.tokenPriceVsQuote) : BIG_ZERO
   }
 
   // We can only calculate profits without a quoteTokenFarm for BUSD/BNB farms
@@ -48,13 +59,22 @@ const getFarmBaseTokenPrice = (farm: Farm, quoteTokenFarm: Farm, bnbPriceBusd: B
   return BIG_ZERO
 }
 
-const getFarmQuoteTokenPrice = (farm: Farm, quoteTokenFarm: Farm, bnbPriceBusd: BigNumber): BigNumber => {
+const getFarmQuoteTokenPrice = (
+  farm: Farm,
+  quoteTokenFarm: Farm,
+  bnbPriceBusd: BigNumber,
+  czbCzusdPrice: BigNumber,
+): BigNumber => {
   if (farm.quoteToken.symbol === 'BUSD') {
     return BIG_ONE
   }
 
   if (farm.quoteToken.symbol === 'wBNB') {
     return bnbPriceBusd
+  }
+
+  if (farm.quoteToken.symbol === 'CZB') {
+    return czbCzusdPrice
   }
 
   if (!quoteTokenFarm) {
@@ -68,18 +88,23 @@ const getFarmQuoteTokenPrice = (farm: Farm, quoteTokenFarm: Farm, bnbPriceBusd: 
   if (quoteTokenFarm.quoteToken.symbol === 'BUSD') {
     return quoteTokenFarm.tokenPriceVsQuote ? new BigNumber(quoteTokenFarm.tokenPriceVsQuote) : BIG_ZERO
   }
+  if (quoteTokenFarm.quoteToken.symbol === 'CZB') {
+    return quoteTokenFarm.tokenPriceVsQuote ? czbCzusdPrice.times(quoteTokenFarm.tokenPriceVsQuote) : BIG_ZERO
+  }
 
   return BIG_ZERO
 }
 
 const fetchFarmsPrices = async (farms) => {
-  const bnbBusdFarm = farms.find((farm: Farm) => farm.pid === 3)
-  const bnbPriceBusd = bnbBusdFarm.tokenPriceVsQuote ? BIG_ONE.div(bnbBusdFarm.tokenPriceVsQuote) : BIG_ZERO
+  const bnbCzusdFarm = farms.find((farm: Farm) => farm.pid === 3)
+  const czbCzusdFarm = farms.find((farm: Farm) => farm.pid === 1)
+  const bnbPriceCzusd = bnbCzusdFarm.tokenPriceVsQuote ? BIG_ONE.div(bnbCzusdFarm.tokenPriceVsQuote) : BIG_ZERO
+  const czbCzusdPrice = czbCzusdFarm.tokenPriceVsQuote ? new BigNumber(czbCzusdFarm.tokenPriceVsQuote) : BIG_ZERO
 
   const farmsWithPrices = farms.map((farm) => {
     const quoteTokenFarm = getFarmFromTokenSymbol(farms, farm.quoteToken.symbol)
-    const baseTokenPrice = getFarmBaseTokenPrice(farm, quoteTokenFarm, bnbPriceBusd)
-    const quoteTokenPrice = getFarmQuoteTokenPrice(farm, quoteTokenFarm, bnbPriceBusd)
+    const baseTokenPrice = getFarmBaseTokenPrice(farm, quoteTokenFarm, bnbPriceCzusd, czbCzusdPrice)
+    const quoteTokenPrice = getFarmQuoteTokenPrice(farm, quoteTokenFarm, bnbPriceCzusd, czbCzusdPrice)
     const token = { ...farm.token, busdPrice: baseTokenPrice.toJSON() }
     const quoteToken = { ...farm.quoteToken, busdPrice: quoteTokenPrice.toJSON() }
     return { ...farm, token, quoteToken }

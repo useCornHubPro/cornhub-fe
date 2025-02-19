@@ -11,6 +11,9 @@ import { getSouschefV2Contract } from 'utils/contractHelpers'
 
 export const fetchPoolsBlockLimits = async () => {
   const poolsWithEnd = poolsConfig.filter((p) => p.sousId !== 0)
+  if (poolsWithEnd.length === 0) {
+    return []
+  }
   const callsStartBlock = poolsWithEnd.map((poolConfig) => {
     return {
       address: getAddress(poolConfig.contractAddress),
@@ -43,33 +46,42 @@ export const fetchPoolsTotalStaking = async () => {
   const bnbPool = poolsConfig.filter((p) => p.stakingToken.symbol === 'BNB' && p.sousId !== 0)
   const basePool = poolsConfig.filter((p) => p.sousId === 0)
 
-  const callsNonBnbPools = nonBnbPools.map((poolConfig) => {
-    return {
-      address: getAddress(poolConfig.stakingToken.address),
-      name: 'balanceOf',
-      params: [getAddress(poolConfig.contractAddress)],
-    }
-  })
+  const callsNonBnbPools =
+    nonBnbPools.length !== 0
+      ? nonBnbPools.map((poolConfig) => {
+          return {
+            address: getAddress(poolConfig.stakingToken.address),
+            name: 'balanceOf',
+            params: [getAddress(poolConfig.contractAddress)],
+          }
+        })
+      : []
 
-  const callsBnbPools = bnbPool.map((poolConfig) => {
-    return {
-      address: getWbnbAddress(),
-      name: 'balanceOf',
-      params: [getAddress(poolConfig.contractAddress)],
-    }
-  })
-  const callsBasePools = basePool.map((poolConfig) => {
-    return {
-      address: poolConfig.contractAddress[parseInt(process.env.REACT_APP_CHAIN_ID, 10)],
-      name: 'poolInfo',
-      params: [poolConfig.sousId],
-    }
-  })
-  const nonBnbPoolsTotalStaked = await multicall(cakeABI, callsNonBnbPools)
-  const bnbPoolsTotalStaked = await multicall(wbnbABI, callsBnbPools)
-  const basePoolsTotalStaked = await multicall(masterchefABI, callsBasePools)
-  console.log('basePoolsTotalStaked', basePoolsTotalStaked)
-  console.log('basePoolsTotalStaked', basePoolsTotalStaked[0].totalDeposit)
+  const callsBnbPools =
+    bnbPool.length !== 0
+      ? bnbPool.map((poolConfig) => {
+          return {
+            address: getWbnbAddress(),
+            name: 'balanceOf',
+            params: [getAddress(poolConfig.contractAddress)],
+          }
+        })
+      : []
+  const callsBasePools =
+    basePool.length !== 0
+      ? basePool.map((poolConfig) => {
+          return {
+            address: poolConfig.contractAddress[parseInt(process.env.REACT_APP_CHAIN_ID, 10)],
+            name: 'poolInfo',
+            params: [poolConfig.sousId],
+          }
+        })
+      : []
+
+  const nonBnbPoolsTotalStaked = callsNonBnbPools.length !== 0 ? await multicall(cakeABI, callsNonBnbPools) : []
+  const bnbPoolsTotalStaked = callsBnbPools.length !== 0 ? await multicall(wbnbABI, callsBnbPools) : []
+  const basePoolsTotalStaked = callsBasePools.length !== 0 ? await multicall(masterchefABI, callsBasePools) : []
+
   return [
     ...nonBnbPools.map((p, index) => ({
       sousId: p.sousId,
@@ -81,7 +93,7 @@ export const fetchPoolsTotalStaking = async () => {
     })),
     ...basePool.map((p, index) => ({
       sousId: p.sousId,
-      totalStaked: new BigNumber(basePoolsTotalStaked[index].totalDeposit).toJSON(),
+      totalStaked: basePoolsTotalStaked[0].totalDeposit.toJSON(),
     })),
   ]
 }

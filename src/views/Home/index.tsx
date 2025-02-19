@@ -13,7 +13,7 @@ import FarmsPoolsRow from './components/FarmsPoolsRow'
 import Footer from './components/Footer'
 import CakeDataRow from './components/CakeDataRow'
 import CakeDataRowTvl from './components/CakeDataRowTvl'
-import { WedgeTopLeft, InnerWedgeWrapper, OuterWedgeWrapper, WedgeTopRight } from './components/WedgeSvgs'
+// import { WedgeTopLeft, InnerWedgeWrapper, OuterWedgeWrapper, WedgeTopRight } from './components/WedgeSvgs'
 import UserBanner from './components/UserBanner'
 
 const StyledHeroSection = styled(PageSection)`
@@ -63,7 +63,7 @@ const Home: React.FC = () => {
 
       <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.background}
+        background="none"
         index={2}
         hasCurvedDivider={false}
       >
@@ -71,18 +71,7 @@ const Home: React.FC = () => {
         <FarmsPoolsRow />
       </PageSection>
 
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.gradients.cardHeader}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <OuterWedgeWrapper>
-          <InnerWedgeWrapper width="150%" top fill={theme.colors.background}>
-            <WedgeTopRight />
-          </InnerWedgeWrapper>
-        </OuterWedgeWrapper>
-      </PageSection>
+      <br />
 
       <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}

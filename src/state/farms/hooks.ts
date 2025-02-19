@@ -18,7 +18,6 @@ export const usePollFarmsData = (includeArchive = false) => {
   useEffect(() => {
     const farmsToFetch = includeArchive ? farmsConfig : nonArchivedFarms
     const pids = farmsToFetch.map((farmToFetch) => farmToFetch.pid)
-
     dispatch(fetchFarmsPublicDataAsync(pids))
 
     if (account) {
@@ -37,7 +36,7 @@ export const usePollCoreFarmData = () => {
   const { fastRefresh } = useRefresh()
 
   useEffect(() => {
-    dispatch(fetchFarmsPublicDataAsync([1, 3]))
+    dispatch(fetchFarmsPublicDataAsync([1, 2, 3]))
   }, [dispatch, fastRefresh])
 }
 

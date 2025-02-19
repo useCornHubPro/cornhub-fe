@@ -26,7 +26,7 @@ export const swapSectionData: SalesSectionProps = {
 
 export const earnSectionData: SalesSectionProps = {
   headingText: 'Earn passive income with crypto.',
-  bodyText: 'Tidaldex makes it easy to make your crypto work for you.',
+  bodyText: 'CornHub makes it easy to make your crypto work for you.',
   reverse: true,
   primaryButton: {
     to: '/farms',
@@ -49,7 +49,7 @@ export const earnSectionData: SalesSectionProps = {
 }
 
 export const cakeSectionData: SalesSectionProps = {
-  headingText: 'Tidaldex',
+  headingText: 'CornHub',
   bodyText: 'Trade, stake, and savor the sweetness of crypto on the most rewarding decentralized platform',
   reverse: false,
   primaryButton: {
@@ -66,7 +66,7 @@ export const cakeSectionData: SalesSectionProps = {
   images: {
     path: '/images/home/trade/',
     attributes: [
-      { src: 'Tidaldex', alt: 'Tidaldex token' },
+      { src: 'CornHub', alt: 'CornHub token' },
 
       // { src: 'BNB', alt: 'BNB token' },
       // { src: 'BTC', alt: 'BTC token' },

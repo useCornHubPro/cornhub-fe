@@ -312,7 +312,7 @@ const Pools: React.FC = () => {
           mx="auto"
           mt="12px"
           src="/images/decorations/3d-syrup.png"
-          alt="Tidaldex illustration"
+          alt="CornHub illustration"
           width={110}
           height={96}
         />

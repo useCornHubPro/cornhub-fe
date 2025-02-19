@@ -20,7 +20,7 @@ const Footer = () => {
   return (
     <Wrapper>
       <ButtonMenuItem as="a" display="none">
-        Tidaldex
+        CornHub
       </ButtonMenuItem>
     </Wrapper>
   )

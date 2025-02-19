@@ -15,6 +15,7 @@ const BgWrapper = styled.div`
   height: 100%;
   top: 0px;
   left: 0px;
+  background-image: url('images/backgrounds/bg-man-light.png');
 `
 
 const StyledSunburst = styled(SunburstSvg)`
@@ -106,7 +107,7 @@ const Footer = () => {
       <Wrapper className="mainfooter">
         <Wrapper className="div1">
           <Heading className="heading" mb="24px" scale="xl" color="white">
-            {t('Join the TidalDex community')}
+            {t('Join the CornHub community')}
           </Heading>
           <Text className="subtext" textAlign="center" color="white">
             {t('Take part in the conversation! Stay in the know & be the first to hear about any new updates')}

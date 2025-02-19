@@ -7,6 +7,7 @@ import { usePriceCakeBusd } from 'state/farms/hooks'
 import { Flex, Text, Heading, Image, Skeleton } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { parseEther } from 'ethers/lib/utils'
+import { useGlitch } from 'react-powerglitch'
 
 import Balance from 'components/Balance'
 
@@ -48,6 +49,52 @@ const emissionsPerBlock = 48
 
 const CakeDataRow = () => {
   const { t } = useTranslation()
+  const glitch1 = useGlitch({
+    glitchTimeSpan: {
+      start: 0.44,
+      end: 0.54,
+    },
+    slice: {
+      count: 7,
+      velocity: 11,
+      minHeight: 0.07,
+      maxHeight: 0.72,
+    },
+  })
+  const glitch2 = useGlitch({
+    glitchTimeSpan: {
+      start: 0.25,
+      end: 0.56,
+    },
+    shake: {
+      velocity: 18,
+      amplitudeX: 0.54,
+      amplitudeY: 0.05,
+    },
+    slice: {
+      count: 7,
+      velocity: 11,
+      minHeight: 0.07,
+      maxHeight: 0.72,
+    },
+  })
+  const glitch3 = useGlitch({
+    glitchTimeSpan: {
+      start: 0.82,
+      end: 1,
+    },
+    shake: {
+      velocity: 10,
+      amplitudeX: 0.16,
+      amplitudeY: 0.63,
+    },
+    slice: {
+      count: 4,
+      velocity: 14,
+      minHeight: 0.16,
+      maxHeight: 0.27,
+    },
+  })
 
   //   const totalSupply = useTotalSupply()
   //  const burnedBalance = getBalanceNumber(useBurnedBalance(getCakeAddress()))
@@ -71,13 +118,13 @@ const CakeDataRow = () => {
   return (
     <Grid className="supplymain">
       <StyledColumn className="box1">
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" ref={glitch1.ref}>
           <StyledImage className="iconimage" src="/images/home/icon1.png" alt="" width={64} height={64} /> {t('')}
           <Text color="#000" marginBottom={1}>
             {t('Max supply')}
           </Text>
           {cakeSupply ? (
-            <Balance decimals={0} lineHeight="1.1" color="#0097e1" fontSize="24px" bold value={1000000000} />
+            <Balance decimals={0} lineHeight="1.1" color="#e18700" fontSize="24px" bold value={1000000000} />
           ) : (
             <Skeleton height={24} width={126} my="4px" />
           )}
@@ -85,14 +132,14 @@ const CakeDataRow = () => {
       </StyledColumn>
 
       <StyledColumn className="box1">
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" ref={glitch3.ref}>
           <StyledImage className="iconimage" src="/images/home/icon2.png" alt="AmpleSwap" width={64} height={64} />{' '}
           {t('')}
           <Text color="#000" marginBottom={1}>
             {t('Circulating supply')}
           </Text>
           {CirculationBalance ? (
-            <Balance decimals={0} lineHeight="1.1" color="#0097e1" fontSize="24px" bold value={CirculationBalance} />
+            <Balance decimals={0} lineHeight="1.1" color="#e18700" fontSize="24px" bold value={CirculationBalance} />
           ) : (
             <Skeleton height={24} width={126} my="4px" />
           )}
@@ -100,16 +147,18 @@ const CakeDataRow = () => {
       </StyledColumn>
 
       <StyledColumn className="box1" noMobileBorder>
-        <StyledImage className="iconimage" src="/images/home/icon3.png" alt="AmpleSwap" width={64} height={64} />{' '}
-        {t('')}
-        <Text color="#000">{t('Total Burned')}</Text>
-        {burnedBalance ? (
-          <Heading scale="lg">
-            <Balance color="#0097e1" fontSize="24px" bold decimals={0} value={burnedBalance} />
-          </Heading>
-        ) : (
-          <Skeleton height={24} width={126} my="4px" />
-        )}
+        <Flex flexDirection="column" ref={glitch2.ref}>
+          <StyledImage className="iconimage" src="/images/home/icon3.png" alt="AmpleSwap" width={64} height={64} />{' '}
+          {t('')}
+          <Text color="#000">{t('Total Burned')}</Text>
+          {burnedBalance ? (
+            <Heading scale="lg">
+              <Balance color="#e18700" fontSize="24px" bold decimals={0} value={burnedBalance} />
+            </Heading>
+          ) : (
+            <Skeleton height={24} width={126} my="4px" />
+          )}
+        </Flex>
       </StyledColumn>
     </Grid>
   )

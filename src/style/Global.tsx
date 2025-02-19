@@ -15,8 +15,8 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-image: ${({ theme }) =>
       theme.isDark ? "url('images/backgrounds/bg-tile-dark.png')" : "url('/images/backgrounds/bg-tile-light.png')"};
-    animation: animatedBackground 45s ease-in-out infinite;
-
+    animation: none;
+    background-size: cover;
     img {
       height: auto;
       max-width: 100%;

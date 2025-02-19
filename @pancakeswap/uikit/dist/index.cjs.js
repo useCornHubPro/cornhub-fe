@@ -3313,75 +3313,78 @@ var useKonamiCheatCode = function (matchedCodeHandler) {
 };
 
 var baseColors = {
-    failure: "#FF4D6A", // Bright red-pink for errors
-    primary: "#0FD1FB", // Bright cyan - main brand color
-    primaryBright: "#47E3FF", // Lighter cyan for highlights
-    primaryDark: "#0098A1", // Darker cyan for depth
-    secondary: "#1CA7D4", // Medium blue-cyan
-    success: "#22DDC9", // Cyan-tinted green for success
-    warning: "#FFB23F", // Warm orange for warnings
+    failure: "#ff0600", // Red from support colors
+    primary: "#ffdc00", // Brand dark theme color
+    primaryBright: "#ffdb00", // Brand light theme color
+    primaryDark: "#f0e111", // From gradient 1
+    secondary: "#ff6326", // Pink from support colors
+    success: "#00ff00", // Green from support colors
+    warning: "#ff8200", // Orange from support colors
 };
 
 var additionalColors = {
-    binance: "#F0B90B", // Keep yellow for Binance
-    overlay: "#0A4B5B", // Dark cyan for overlays
-    gold: "#FFD700", // Keep gold
-    silver: "#B8E8F2", // Cyan-tinted silver
-    bronze: "#E7974D", // Keep bronze
+    binance: "#ffdc00", // Using brand color
+    overlay: "#000000", // Using dark primary
+    gold: "#ffdc00", // Using brand color
+    silver: "#acacac", // From gradient 2
+    bronze: "#c000ee", // From gradient 3
 };
 
-var lightColors = __assign(__assign(__assign({}, baseColors), additionalColors), { 
-    background: "#EBF8FC", // Light cyan background
-    backgroundDisabled: "#E0EEF2", // Slightly darker cyan for disabled state
-    backgroundAlt: "#FFFFFF", // Keep white for contrast
-    cardBorder: "#B8E8F2", // Light cyan border
-    contrast: "#0A4B5B", // Dark cyan for high contrast
-    dropdown: "#E5F6FA", // Very light cyan for dropdowns
-    dropdownDeep: "#D9F0F5", // Slightly darker cyan for nested dropdowns
-    invertedContrast: "#FFFFFF", // Keep white
-    input: "#E0F3F7", // Light cyan for inputs
-    inputSecondary: "#B8E8F2", // Medium cyan for secondary inputs
-    tertiary: "#F0FAFC", // Very light cyan for tertiary elements
-    text: "#0A4B5B", // Dark cyan for text
-    textDisabled: "#92C5D1", // Medium cyan for disabled text
-    textSubtle: "#4A8B9A", // Medium-dark cyan for subtle text
-    disabled: "#E0EEF2", // Light cyan for disabled elements
+var lightColors = __assign(__assign(__assign({}, baseColors), additionalColors), {
+    background: "#ffffff", // Light primary
+    backgroundDisabled: "#e7e7e5", // From gradient 1
+    backgroundAlt: "#ffffff", // Light primary
+    cardBorder: "#acacac", // From gradient 2
+    contrast: "#000000", // Dark primary
+    dropdown: "#ffffff", // Light primary
+    dropdownDeep: "#f0e111", // From gradient 1
+    invertedContrast: "#000000", // Dark primary
+    input: "#ffffff", // Light primary
+    inputSecondary: "#f0e111", // From gradient 1
+    tertiary: "#e7e7e5", // From gradient 1
+    text: "#000000", // Dark primary
+    textDisabled: "#acacac", // From gradient 2
+    textSubtle: "#000000", // Dark primary
+    disabled: "#e7e7e5", // From gradient 1
     gradients: {
-        bubblegum: "linear-gradient(139.73deg, #E5F8FF 0%, #D0F3FF 100%)", // Light cyan gradient
-        inverseBubblegum: "linear-gradient(139.73deg, #D0F3FF 0%, #E5F8FF 100%)", // Inverse light cyan
-        cardHeader: "linear-gradient(111.68deg, #F0FAFF 0%, #E5F8FF 100%)", // Subtle cyan header
-        blue: "linear-gradient(180deg, #0FD1FB 0%, #0098A1 100%)", // Primary cyan gradient
-        violet: "linear-gradient(180deg, #B8E8F2 0%, #8CD9E6 100%)", // Secondary cyan
-        violetAlt: "linear-gradient(180deg, #E0F3F7 0%, #B8E8F2 100%)", // Alternative cyan
-        gold: "linear-gradient(180deg, #FFD800 0%, #FDAB32 100%)", // Keep gold for alerts/warnings
-    } });
-var darkColors = __assign(__assign(__assign({}, baseColors), additionalColors), { 
-    secondary: "#0FD1FB", // Bright cyan for secondary elements
-    background: "#051B2C", // Very dark blue-cyan
-    backgroundDisabled: "#0A2A3D", // Slightly lighter dark blue
-    backgroundAlt: "#072435", // Dark blue-cyan alternative
-    cardBorder: "#0C3B54", // Medium-dark cyan border
-    contrast: "#FFFFFF", // Keep white for contrast
-    dropdown: "#062331", // Dark blue-cyan for dropdowns
-    dropdownDeep: "#041824", // Deeper dark blue for nested dropdowns
-    invertedContrast: "#051B2C", // Very dark blue-cyan
-    input: "#0A2A3D", // Dark blue input background
-    inputSecondary: "#072435", // Slightly lighter input background
-    primaryDark: "#0098A1", // Keep existing cyan
-    tertiary: "#0C3B54", // Medium-dark cyan
-    text: "#E5F6FA", // Very light cyan for text
-    textDisabled: "#3A6F85", // Muted cyan for disabled text
-    textSubtle: "#7CB0C7", // Light cyan for subtle text
-    disabled: "#0A2A3D", // Dark blue for disabled elements
+        bubblegum: "linear-gradient(139.73deg, #f0e111 0%, #e7e7e5 100%)", // Gradient 1
+        inverseBubblegum: "linear-gradient(139.73deg, #e7e7e5 0%, #f0e111 100%)", // Inverse gradient 1
+        cardHeader: "linear-gradient(139.73deg, #f0e111 0%, #ffdc00 47%, #ff8200 100%)", // Light theme gradient
+        blue: "linear-gradient(139.73deg, #00dac5 0%, #00ff00 47%, #ffdc00 100%)", // Gradient 4
+        violet: "linear-gradient(139.73deg, #c000ee 0%, #3e00ff 47%, #00cfdd 100%)", // Gradient 3
+        violetAlt: "linear-gradient(139.73deg, #000000 0%, #acacac 47%, #ff6326 100%)", // Gradient 2
+        gold: "linear-gradient(139.73deg, #ffdc00 0%, #ff8200 100%)", // Brand colors gradient
+    }
+});
+
+var darkColors = __assign(__assign(__assign({}, baseColors), additionalColors), {
+    secondary: "#ff6326", // Pink from support colors
+    background: "#000000", // Dark primary
+    backgroundDisabled: "#acacac", // From gradient 2
+    backgroundAlt: "#000000", // Dark primary
+    cardBorder: "#acacac", // From gradient 2
+    contrast: "#ffffff", // Light primary
+    dropdown: "#000000", // Dark primary
+    dropdownDeep: "#000000", // Dark primary
+    invertedContrast: "#ffffff", // Light primary
+    input: "#000000", // Dark primary
+    inputSecondary: "#efefef", // Dark primary
+    primaryDark: "#ffdc00", // Brand dark theme color
+    tertiary: "#acacac", // From gradient 2
+    text: "#ffdc00", // Light primary
+    textDisabled: "#555555", // From gradient 2
+    textSubtle: "#f7ff00", // Light primary
+    disabled: "#acacac", // From gradient 2
     gradients: {
-        bubblegum: "linear-gradient(139.73deg, #0A2E44 0%, #051B2C 100%)", // Deep ocean gradient
-        inverseBubblegum: "linear-gradient(139.73deg, #051B2C 0%, #0A2E44 100%)", // Inverse deep ocean
-        cardHeader: "linear-gradient(166.77deg, #0C3B54 0%, #072435 100%)", // Dark cyan header
-        blue: "linear-gradient(180deg, #0FD1FB 0%, #0098A1 100%)", // Bright cyan gradient
-        violet: "linear-gradient(180deg, #0A4B5B 0%, #083744 100%)", // Deep cyan
-        violetAlt: "linear-gradient(180deg, #0C3B54 0%, #062331 100%)", // Alternative deep cyan
-        gold: "linear-gradient(180deg, #FFD800 0%, #FDAB32 100%)", // Keep gold for alerts/warnings
-    } });
+        bubblegum: "linear-gradient(139.73deg, #000000 0%, #acacac 47%, #ff6326 100%)", // Gradient 2
+        inverseBubblegum: "linear-gradient(139.73deg, #ff6326 0%, #acacac 47%, #000000 100%)", // Inverse gradient 2
+        cardHeader: "linear-gradient(139.73deg, #000000 0%, #acacac 47%, #ff6326 100%)", // Dark theme gradient
+        blue: "linear-gradient(139.73deg, #c000ee 0%, #3e00ff 47%, #00cfdd 100%)", // Gradient 3
+        violet: "linear-gradient(139.73deg, #000000 0%, #acacac 47%, #ff6326 100%)", // Gradient 2
+        violetAlt: "linear-gradient(139.73deg, #c000ee 0%, #00cfdd 100%)", // Simplified gradient 3
+        gold: "linear-gradient(139.73deg, #ffdc00 0%, #ff8200 100%)", // Brand colors gradient
+    }
+});
 
 var light$7 = {
     background: lightColors.backgroundAlt,
@@ -4439,16 +4442,16 @@ var Menu$1 = function (_a) {
     // Find the home link if provided
     var homeLink = links.find(function (link) { return link.label === "Home"; });
     return (React__default['default'].createElement(Wrapper, null,
-        React__default['default'].createElement(StyledNav, { showMenu: showMenu },
+        React__default['default'].createElement(StyledNav, { showMenu: showMenu, className: "menu-styled-nav" },
             React__default['default'].createElement(Logo$1, { isPushed: isPushed, togglePush: function () { return setIsPushed(function (prevState) { return !prevState; }); }, isDark: isDark, href: (_b = homeLink === null || homeLink === void 0 ? void 0 : homeLink.href) !== null && _b !== void 0 ? _b : "/" }),
             React__default['default'].createElement(Flex, null,
                 globalMenu,
                 " ",
                 userMenu)),
-        React__default['default'].createElement(BodyWrapper, null,
-            React__default['default'].createElement(Panel, { isPushed: isPushed, isMobile: isSmallerScreen, showMenu: showMenu, isDark: isDark, toggleTheme: toggleTheme, langs: langs, setLang: setLang, currentLang: currentLang, cakePriceUsd: cakePriceUsd, pushNav: setIsPushed, links: links }),
-            React__default['default'].createElement(Inner, { isPushed: isPushed, showMenu: showMenu }, children),
-            React__default['default'].createElement(MobileOnlyOverlay, { show: isPushed, onClick: function () { return setIsPushed(false); }, role: "presentation" }))));
+        React__default['default'].createElement(BodyWrapper, { className: "menu-body-wrapper" },
+            React__default['default'].createElement(Panel, { className: "menu-panel", isPushed: isPushed, isMobile: isSmallerScreen, showMenu: showMenu, isDark: isDark, toggleTheme: toggleTheme, langs: langs, setLang: setLang, currentLang: currentLang, cakePriceUsd: cakePriceUsd, pushNav: setIsPushed, links: links }),
+            React__default['default'].createElement(Inner, { className: "menu-inner", isPushed: isPushed, showMenu: showMenu }, children),
+            React__default['default'].createElement(MobileOnlyOverlay, { className: "menu-mobile-overlay",  show: isPushed, onClick: function () { return setIsPushed(false); }, role: "presentation" }))));
 };
 var templateObject_1$9, templateObject_2$4, templateObject_3$1, templateObject_4, templateObject_5;
 

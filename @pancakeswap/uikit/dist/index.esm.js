@@ -1,16 +1,16 @@
-import React, { isValidElement, cloneElement, Children, forwardRef, useState, useRef, useEffect, useMemo, useReducer, useCallback, createContext, useContext } from 'react';
-import styled, { keyframes, css, useTheme, ThemeProvider, createGlobalStyle } from 'styled-components';
-import { space, typography, layout, variant as variant$1, background, border, position, flexbox, grid, color } from 'styled-system';
-import get from 'lodash/get';
-import uniqueId from 'lodash/uniqueId';
 import { uniqueId as uniqueId$1 } from 'lodash';
+import debounce from 'lodash/debounce';
+import get from 'lodash/get';
+import noop from 'lodash/noop';
+import throttle from 'lodash/throttle';
+import uniqueId from 'lodash/uniqueId';
+import React, { Children, cloneElement, createContext, forwardRef, isValidElement, useCallback, useContext, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
-import noop from 'lodash/noop';
-import debounce from 'lodash/debounce';
-import throttle from 'lodash/throttle';
 import { Link as Link$1, NavLink, useLocation } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import styled, { ThemeProvider, createGlobalStyle, css, keyframes, useTheme } from 'styled-components';
+import { background, border, color, flexbox, grid, layout, position, space, typography, variant as variant$1 } from 'styled-system';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -27,7 +27,7 @@ OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 
-var __assign = function() {
+var __assign = function () {
     __assign = Object.assign || function __assign(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
             s = arguments[i];
@@ -114,16 +114,16 @@ var getFontSize = function (_a) {
 };
 var Text = styled.div(templateObject_1$18 || (templateObject_1$18 = __makeTemplateObject(["\n  color: ", ";\n  font-size: ", ";\n  font-weight: ", ";\n  line-height: 1.5;\n  ", "\n  ", "\n\n  ", "\n  ", "\n  ", "\n"], ["\n  color: ", ";\n  font-size: ", ";\n  font-weight: ", ";\n  line-height: 1.5;\n  ", "\n  ",
     "\n\n  ", "\n  ", "\n  ", "\n"])), getColor, getFontSize, function (_a) {
-    var bold = _a.bold;
-    return (bold ? 600 : 400);
-}, function (_a) {
-    var textTransform = _a.textTransform;
-    return textTransform && "text-transform: " + textTransform + ";";
-}, function (_a) {
-    var ellipsis = _a.ellipsis;
-    return ellipsis &&
-        "white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;";
-}, space, typography, layout);
+        var bold = _a.bold;
+        return (bold ? 600 : 400);
+    }, function (_a) {
+        var textTransform = _a.textTransform;
+        return textTransform && "text-transform: " + textTransform + ";";
+    }, function (_a) {
+        var ellipsis = _a.ellipsis;
+        return ellipsis &&
+            "white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;";
+    }, space, typography, layout);
 Text.defaultProps = {
     color: "text",
     small: false,
@@ -137,10 +137,12 @@ var TooltipText = styled(Text)(templateObject_1$17 || (templateObject_1$17 = __m
 });
 var templateObject_1$17;
 
-var getExternalLinkProps = function () { return ({
-    target: "_blank",
-    rel: "noreferrer noopener",
-}); };
+var getExternalLinkProps = function () {
+    return ({
+        target: "_blank",
+        rel: "noreferrer noopener",
+    });
+};
 
 var scales$8 = {
     MD: "md",
@@ -231,11 +233,11 @@ var getOpacity = function (_a) {
 var StyledButton = styled.button(templateObject_1$16 || (templateObject_1$16 = __makeTemplateObject(["\n  align-items: center;\n  border: 0;\n  border-radius: 16px;\n  box-shadow: 0px -1px 0px 0px rgba(14, 14, 44, 0.4) inset;\n  cursor: pointer;\n  display: inline-flex;\n  font-family: inherit;\n  font-size: 16px;\n  font-weight: 600;\n  justify-content: center;\n  letter-spacing: 0.03em;\n  line-height: 1;\n  opacity: ", ";\n  outline: 0;\n  transition: background-color 0.2s, opacity 0.2s;\n\n  &:hover:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled):not(:active) {\n    opacity: 0.65;\n  }\n\n  &:active:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled) {\n    opacity: 0.85;\n    transform: translateY(1px);\n    box-shadow: none;\n  }\n\n  ", "\n  ", "\n  ", "\n  ", "\n  ", "\n"], ["\n  align-items: center;\n  border: 0;\n  border-radius: 16px;\n  box-shadow: 0px -1px 0px 0px rgba(14, 14, 44, 0.4) inset;\n  cursor: pointer;\n  display: inline-flex;\n  font-family: inherit;\n  font-size: 16px;\n  font-weight: 600;\n  justify-content: center;\n  letter-spacing: 0.03em;\n  line-height: 1;\n  opacity: ", ";\n  outline: 0;\n  transition: background-color 0.2s, opacity 0.2s;\n\n  &:hover:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled):not(:active) {\n    opacity: 0.65;\n  }\n\n  &:active:not(:disabled):not(.pancake-button--disabled):not(.pancake-button--disabled) {\n    opacity: 0.85;\n    transform: translateY(1px);\n    box-shadow: none;\n  }\n\n  ", "\n  ",
     "\n  ",
     "\n  ", "\n  ", "\n"])), getOpacity, getDisabledStyles, variant$1({
-    prop: "scale",
-    variants: scaleVariants$1,
-}), variant$1({
-    variants: styleVariants$2,
-}), layout, space);
+        prop: "scale",
+        variants: scaleVariants$1,
+    }), variant$1({
+        variants: styleVariants$2,
+    }), layout, space);
 var templateObject_1$16;
 
 var Button = function (props) {
@@ -253,14 +255,14 @@ var Button = function (props) {
     return (React.createElement(StyledButton, __assign({ "$isLoading": isLoading, className: classNames.join(" "), disabled: isDisabled }, internalProps, rest),
         React.createElement(React.Fragment, null,
             isValidElement(startIcon) &&
-                cloneElement(startIcon, {
-                    mr: "0.5rem",
-                }),
+            cloneElement(startIcon, {
+                mr: "0.5rem",
+            }),
             children,
             isValidElement(endIcon) &&
-                cloneElement(endIcon, {
-                    ml: "0.5rem",
-                }))));
+            cloneElement(endIcon, {
+                ml: "0.5rem",
+            }))));
 };
 Button.defaultProps = {
     isLoading: false,
@@ -1398,21 +1400,21 @@ var getBorderColor$1 = function (_a) {
 };
 var StyledButtonMenu = styled.div(templateObject_1$Z || (templateObject_1$Z = __makeTemplateObject(["\n  background-color: ", ";\n  border-radius: 16px;\n  display: ", ";\n  border: 1px solid ", ";\n  width: ", ";\n\n  & > button,\n  & > a {\n    flex: ", ";\n  }\n\n  & > button + button,\n  & > a + a {\n    margin-left: 2px; // To avoid focus shadow overlap\n  }\n\n  & > button,\n  & a {\n    box-shadow: none;\n  }\n\n  ", "\n  ", "\n"], ["\n  background-color: ", ";\n  border-radius: 16px;\n  display: ", ";\n  border: 1px solid ", ";\n  width: ", ";\n\n  & > button,\n  & > a {\n    flex: ", ";\n  }\n\n  & > button + button,\n  & > a + a {\n    margin-left: 2px; // To avoid focus shadow overlap\n  }\n\n  & > button,\n  & a {\n    box-shadow: none;\n  }\n\n  ",
     "\n  ", "\n"])), getBackgroundColor, function (_a) {
-    var fullWidth = _a.fullWidth;
-    return (fullWidth ? "flex" : "inline-flex");
-}, getBorderColor$1, function (_a) {
-    var fullWidth = _a.fullWidth;
-    return (fullWidth ? "100%" : "auto");
-}, function (_a) {
-    var fullWidth = _a.fullWidth;
-    return (fullWidth ? 1 : "auto");
-}, function (_a) {
-    var disabled = _a.disabled, theme = _a.theme, variant = _a.variant;
-    if (disabled) {
-        return "\n        opacity: 0.5;\n\n        & > button:disabled {\n          background-color: transparent;\n          color: " + (variant === variants$6.PRIMARY ? theme.colors.primary : theme.colors.textSubtle) + ";\n        }\n    ";
-    }
-    return "";
-}, space);
+        var fullWidth = _a.fullWidth;
+        return (fullWidth ? "flex" : "inline-flex");
+    }, getBorderColor$1, function (_a) {
+        var fullWidth = _a.fullWidth;
+        return (fullWidth ? "100%" : "auto");
+    }, function (_a) {
+        var fullWidth = _a.fullWidth;
+        return (fullWidth ? 1 : "auto");
+    }, function (_a) {
+        var disabled = _a.disabled, theme = _a.theme, variant = _a.variant;
+        if (disabled) {
+            return "\n        opacity: 0.5;\n\n        & > button:disabled {\n          background-color: transparent;\n          color: " + (variant === variants$6.PRIMARY ? theme.colors.primary : theme.colors.textSubtle) + ";\n        }\n    ";
+        }
+        return "";
+    }, space);
 var ButtonMenu$1 = function (_a) {
     var _b = _a.activeIndex, activeIndex = _b === void 0 ? 0 : _b, _c = _a.scale, scale = _c === void 0 ? scales$8.MD : _c, _d = _a.variant, variant = _d === void 0 ? variants$6.PRIMARY : _d, onItemClick = _a.onItemClick, disabled = _a.disabled, children = _a.children, _e = _a.fullWidth, fullWidth = _e === void 0 ? false : _e, props = __rest(_a, ["activeIndex", "scale", "variant", "onItemClick", "disabled", "children", "fullWidth"]);
     return (React.createElement(StyledButtonMenu, __assign({ disabled: disabled, variant: variant, fullWidth: fullWidth }, props), Children.map(children, function (child, index) {
@@ -1462,15 +1464,15 @@ var getBorderColor = function (_a) {
 };
 var StyledCard = styled.div(templateObject_3$c || (templateObject_3$c = __makeTemplateObject(["\n  background: ", ";\n  border-radius: ", ";\n  color: ", ";\n  overflow: hidden;\n  position: relative;\n\n  ", "\n\n  padding: 1px 1px 3px 1px;\n\n  ", "\n"], ["\n  background: ", ";\n  border-radius: ", ";\n  color: ", ";\n  overflow: hidden;\n  position: relative;\n\n  ",
     "\n\n  padding: 1px 1px 3px 1px;\n\n  ", "\n"])), getBorderColor, function (_a) {
-    var theme = _a.theme;
-    return theme.radii.card;
-}, function (_a) {
-    var theme = _a.theme, isDisabled = _a.isDisabled;
-    return theme.colors[isDisabled ? "textDisabled" : "text"];
-}, function (_a) {
-    var isActive = _a.isActive;
-    return isActive && css(templateObject_2$r || (templateObject_2$r = __makeTemplateObject(["\n      animation: ", " 3s ease infinite;\n      background-size: 400% 400%;\n    "], ["\n      animation: ", " 3s ease infinite;\n      background-size: 400% 400%;\n    "])), PromotedGradient);
-}, space);
+        var theme = _a.theme;
+        return theme.radii.card;
+    }, function (_a) {
+        var theme = _a.theme, isDisabled = _a.isDisabled;
+        return theme.colors[isDisabled ? "textDisabled" : "text"];
+    }, function (_a) {
+        var isActive = _a.isActive;
+        return isActive && css(templateObject_2$r || (templateObject_2$r = __makeTemplateObject(["\n      animation: ", " 3s ease infinite;\n      background-size: 400% 400%;\n    "], ["\n      animation: ", " 3s ease infinite;\n      background-size: 400% 400%;\n    "])), PromotedGradient);
+    }, space);
 var StyledCardInner = styled(Box)(templateObject_4$7 || (templateObject_4$7 = __makeTemplateObject(["\n  width: 100%;\n  height: 100%;\n  overflow: ", ";\n  background: ", ";\n  border-radius: ", ";\n"], ["\n  width: 100%;\n  height: 100%;\n  overflow: ", ";\n  background: ", ";\n  border-radius: ", ";\n"])), function (_a) {
     var hasCustomBorder = _a.hasCustomBorder;
     return (hasCustomBorder ? "initial" : "inherit");
@@ -1526,20 +1528,20 @@ var templateObject_1$U;
 
 var StyledCardRibbon = styled.div(templateObject_1$T || (templateObject_1$T = __makeTemplateObject(["\n  z-index: 10;\n  background-color: ", ";\n  color: white;\n  margin: 0;\n  padding: 0;\n  padding: 8px 0;\n  position: absolute;\n  right: ", ";\n  top: 0;\n  text-align: center;\n  transform: translateX(30%) translateY(0%) rotate(45deg);\n  transform: ", ";\n  transform-origin: top left;\n  width: 96px;\n\n  &:before,\n  &:after {\n    background-color: ", ";\n    content: \"\";\n    height: 100%;\n    margin: 0 -1px; /* Removes tiny gap */\n    position: absolute;\n    top: 0;\n    width: 100%;\n  }\n\n  &:before {\n    right: 100%;\n  }\n\n  &:after {\n    left: 100%;\n  }\n\n  & > div {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    width: 96px;\n  }\n"], ["\n  z-index: 10;\n  background-color: ", ";\n  color: white;\n  margin: 0;\n  padding: 0;\n  padding: 8px 0;\n  position: absolute;\n  right: ", ";\n  top: 0;\n  text-align: center;\n  transform: translateX(30%) translateY(0%) rotate(45deg);\n  transform: ",
     ";\n  transform-origin: top left;\n  width: 96px;\n\n  &:before,\n  &:after {\n    background-color: ", ";\n    content: \"\";\n    height: 100%;\n    margin: 0 -1px; /* Removes tiny gap */\n    position: absolute;\n    top: 0;\n    width: 100%;\n  }\n\n  &:before {\n    right: 100%;\n  }\n\n  &:after {\n    left: 100%;\n  }\n\n  & > div {\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    width: 96px;\n  }\n"])), function (_a) {
-    var _b = _a.variantColor, variantColor = _b === void 0 ? "secondary" : _b, theme = _a.theme;
-    return theme.colors[variantColor];
-}, function (_a) {
-    var ribbonPosition = _a.ribbonPosition;
-    return (ribbonPosition === "right" ? 0 : "auto");
-}, function (_a) {
-    var ribbonPosition = _a.ribbonPosition;
-    return ribbonPosition === "right"
-        ? "translateX(30%) translateY(0%) rotate(45deg)"
-        : "translateX(0%) translateY(200%) rotate(-45deg)";
-}, function (_a) {
-    var _b = _a.variantColor, variantColor = _b === void 0 ? "secondary" : _b, theme = _a.theme;
-    return theme.colors[variantColor];
-});
+        var _b = _a.variantColor, variantColor = _b === void 0 ? "secondary" : _b, theme = _a.theme;
+        return theme.colors[variantColor];
+    }, function (_a) {
+        var ribbonPosition = _a.ribbonPosition;
+        return (ribbonPosition === "right" ? 0 : "auto");
+    }, function (_a) {
+        var ribbonPosition = _a.ribbonPosition;
+        return ribbonPosition === "right"
+            ? "translateX(30%) translateY(0%) rotate(45deg)"
+            : "translateX(0%) translateY(200%) rotate(-45deg)";
+    }, function (_a) {
+        var _b = _a.variantColor, variantColor = _b === void 0 ? "secondary" : _b, theme = _a.theme;
+        return theme.colors[variantColor];
+    });
 var CardRibbon = function (_a) {
     var variantColor = _a.variantColor, text = _a.text, ribbonPosition = _a.ribbonPosition, props = __rest(_a, ["variantColor", "text", "ribbonPosition"]);
     return (React.createElement(StyledCardRibbon, __assign({ variantColor: variantColor, ribbonPosition: ribbonPosition }, props),
@@ -1659,8 +1661,10 @@ var Bunny = styled.div(templateObject_2$p || (templateObject_2$p = __makeTemplat
 });
 var FallingBunnies = function (_a) {
     var _b = _a.count, count = _b === void 0 ? 30 : _b, _c = _a.size, size = _c === void 0 ? 32 : _c, _d = _a.iterations, iterations = _d === void 0 ? Infinity : _d, _e = _a.duration, duration = _e === void 0 ? 10 : _e;
-    var bunnies = __spreadArray([], Array(count)).map(function (_, index) { return (React.createElement(Bunny, { key: String(index), position: Math.random() * 100, iterations: iterations, duration: duration },
-        React.createElement(Icon$1r, { width: size, height: size }))); });
+    var bunnies = __spreadArray([], Array(count)).map(function (_, index) {
+        return (React.createElement(Bunny, { key: String(index), position: Math.random() * 100, iterations: iterations, duration: duration },
+            React.createElement(Icon$1r, { width: size, height: size })));
+    });
     return React.createElement("div", null, bunnies);
 };
 var templateObject_1$Q, templateObject_2$p;
@@ -1819,45 +1823,45 @@ var _a$3, _b$2;
 var StyledPrimaryImage = styled(TokenImage)(templateObject_1$J || (templateObject_1$J = __makeTemplateObject(["\n  position: absolute;\n  width: ", "; // 92, 82 are arbitrary numbers to fit the variant\n\n  ", "\n"], ["\n  position: absolute;\n  width: ",
     "; // 92, 82 are arbitrary numbers to fit the variant\n\n  ",
     "\n"])), function (_a) {
-    var variant = _a.variant;
-    return variant === variants$4.DEFAULT ? "92%" : "82%";
-}, variant$1({
-    variants: (_a$3 = {},
-        _a$3[variants$4.DEFAULT] = {
-            bottom: "auto",
-            left: 0,
-            right: "auto",
-            top: 0,
-            zIndex: 5,
-        },
-        _a$3[variants$4.INVERTED] = {
-            bottom: 0,
-            left: "auto",
-            right: 0,
-            top: "auto",
-            zIndex: 6,
-        },
-        _a$3),
-}));
+        var variant = _a.variant;
+        return variant === variants$4.DEFAULT ? "92%" : "82%";
+    }, variant$1({
+        variants: (_a$3 = {},
+            _a$3[variants$4.DEFAULT] = {
+                bottom: "auto",
+                left: 0,
+                right: "auto",
+                top: 0,
+                zIndex: 5,
+            },
+            _a$3[variants$4.INVERTED] = {
+                bottom: 0,
+                left: "auto",
+                right: 0,
+                top: "auto",
+                zIndex: 6,
+            },
+            _a$3),
+    }));
 var StyledSecondaryImage = styled(TokenImage)(templateObject_2$o || (templateObject_2$o = __makeTemplateObject(["\n  position: absolute;\n  width: 50%;\n\n  ", "\n"], ["\n  position: absolute;\n  width: 50%;\n\n  ",
     "\n"])), variant$1({
-    variants: (_b$2 = {},
-        _b$2[variants$4.DEFAULT] = {
-            bottom: 0,
-            left: "auto",
-            right: 0,
-            top: "auto",
-            zIndex: 6,
-        },
-        _b$2[variants$4.INVERTED] = {
-            bottom: "auto",
-            left: 0,
-            right: "auto",
-            top: 0,
-            zIndex: 5,
-        },
-        _b$2),
-}));
+        variants: (_b$2 = {},
+            _b$2[variants$4.DEFAULT] = {
+                bottom: 0,
+                left: "auto",
+                right: 0,
+                top: "auto",
+                zIndex: 6,
+            },
+            _b$2[variants$4.INVERTED] = {
+                bottom: "auto",
+                left: 0,
+                right: "auto",
+                top: 0,
+                zIndex: 5,
+            },
+            _b$2),
+    }));
 var templateObject_1$J, templateObject_2$o;
 
 var TokenPairImage = function (_a) {
@@ -1896,11 +1900,11 @@ var StyledInputGroup = styled(Box)(templateObject_1$H || (templateObject_1$H = _
 });
 var InputIcon = styled.div(templateObject_2$m || (templateObject_2$m = __makeTemplateObject(["\n  align-items: center;\n  display: flex;\n  height: 100%;\n  position: absolute;\n  top: 0;\n\n  ", "\n"], ["\n  align-items: center;\n  display: flex;\n  height: 100%;\n  position: absolute;\n  top: 0;\n\n  ",
     "\n"])), function (_a) {
-    var isEndIcon = _a.isEndIcon, scale = _a.scale;
-    return isEndIcon
-        ? "\n    right: " + (scale === scales$7.SM ? "8px" : "16px") + ";\n  "
-        : "\n    left: " + (scale === scales$7.SM ? "8px" : "16px") + ";\n  ";
-});
+        var isEndIcon = _a.isEndIcon, scale = _a.scale;
+        return isEndIcon
+            ? "\n    right: " + (scale === scales$7.SM ? "8px" : "16px") + ";\n  "
+            : "\n    left: " + (scale === scales$7.SM ? "8px" : "16px") + ";\n  ";
+    });
 var InputGroup = function (_a) {
     var _b = _a.scale, scale = _b === void 0 ? scales$7.MD : _b, startIcon = _a.startIcon, endIcon = _a.endIcon, children = _a.children, props = __rest(_a, ["scale", "startIcon", "endIcon", "children"]);
     return (React.createElement(StyledInputGroup, __assign({ scale: scale, width: "100%", position: "relative", hasStartIcon: !!startIcon, hasEndIcon: !!endIcon }, props),
@@ -1963,8 +1967,8 @@ var Icons$3 = {
 };
 var MessageContainer = styled.div(templateObject_1$D || (templateObject_1$D = __makeTemplateObject(["\n  display: flex;\n  background-color: gray;\n  padding: 16px;\n  border-radius: 16px;\n  border: solid 1px;\n\n  ", "\n  ", "\n"], ["\n  display: flex;\n  background-color: gray;\n  padding: 16px;\n  border-radius: 16px;\n  border: solid 1px;\n\n  ", "\n  ",
     "\n"])), space, variant$1({
-    variants: variants$3,
-}));
+        variants: variants$3,
+    }));
 var Message = function (_a) {
     var children = _a.children, variant = _a.variant, icon = _a.icon, props = __rest(_a, ["children", "variant", "icon"]);
     var Icon = Icons$3[variant];
@@ -2149,23 +2153,23 @@ Bar.defaultProps = {
 var StyledProgress = styled.div(templateObject_2$j || (templateObject_2$j = __makeTemplateObject(["\n  position: relative;\n  background-color: ", ";\n  box-shadow: ", ";\n  overflow: hidden;\n\n  ", " {\n    border-top-left-radius: ", ";\n    border-bottom-left-radius: ", ";\n  }\n\n  ", "\n  ", "\n  ", "\n"], ["\n  position: relative;\n  background-color: ", ";\n  box-shadow: ", ";\n  overflow: hidden;\n\n  ", " {\n    border-top-left-radius: ", ";\n    border-bottom-left-radius: ", ";\n  }\n\n  ",
     "\n  ",
     "\n  ", "\n"])), function (_a) {
-    var theme = _a.theme;
-    return theme.colors.input;
-}, function (_a) {
-    var theme = _a.theme;
-    return theme.shadows.inset;
-}, Bar, function (_a) {
-    var variant = _a.variant;
-    return (variant === variants$2.FLAT ? "0" : "32px");
-}, function (_a) {
-    var variant = _a.variant;
-    return (variant === variants$2.FLAT ? "0" : "32px");
-}, variant$1({
-    variants: styleVariants$1,
-}), variant$1({
-    prop: "scale",
-    variants: styleScales,
-}), space);
+        var theme = _a.theme;
+        return theme.colors.input;
+    }, function (_a) {
+        var theme = _a.theme;
+        return theme.shadows.inset;
+    }, Bar, function (_a) {
+        var variant = _a.variant;
+        return (variant === variants$2.FLAT ? "0" : "32px");
+    }, function (_a) {
+        var variant = _a.variant;
+        return (variant === variants$2.FLAT ? "0" : "32px");
+    }, variant$1({
+        variants: styleVariants$1,
+    }), variant$1({
+        prop: "scale",
+        variants: styleScales,
+    }), space);
 var templateObject_1$z, templateObject_2$j;
 
 var ProgressBunnyWrapper = styled.div(templateObject_1$y || (templateObject_1$y = __makeTemplateObject(["\n  display: flex;\n  z-index: 2;\n  top: -65%;\n  position: absolute;\n  transform: translate(-50%, -50%);\n  transition: left 200ms ease-out;\n"], ["\n  display: flex;\n  z-index: 2;\n  top: -65%;\n  position: absolute;\n  transform: translate(-50%, -50%);\n  transition: left 200ms ease-out;\n"])));
@@ -2617,10 +2621,12 @@ var createReducer = function () {
                 }
                 columnCopy = state.columns.map(function (column) {
                     if (state.sortColumn === column.name) {
-                        return __assign(__assign({}, column), { sorted: {
+                        return __assign(__assign({}, column), {
+                            sorted: {
                                 on: true,
                                 asc: column.sorted.asc,
-                            } });
+                            }
+                        });
                     }
                     return column;
                 });
@@ -2657,16 +2663,20 @@ var createReducer = function () {
                                 ? state.rows.sort(byTextAscending(function (object) { return object.original[action.columnName]; }))
                                 : state.rows.sort(byTextDescending(function (object) { return object.original[action.columnName]; }));
                         }
-                        return __assign(__assign({}, column), { sorted: {
+                        return __assign(__assign({}, column), {
+                            sorted: {
                                 on: true,
                                 asc: isAscending,
-                            } });
+                            }
+                        });
                     }
                     // set sorting to false for all other columns
-                    return __assign(__assign({}, column), { sorted: {
+                    return __assign(__assign({}, column), {
+                        sorted: {
                             on: false,
                             asc: false,
-                        } });
+                        }
+                    });
                 });
                 return __assign(__assign({}, state), { columns: columnCopy, rows: sortedRows, sortColumn: action.columnName, columnsByName: getColumnsByName(columnCopy) });
             case "GLOBAL_FILTER":
@@ -2676,9 +2686,11 @@ var createReducer = function () {
                     var _a;
                     selectedRowsById[row.id] = (_a = row.selected) !== null && _a !== void 0 ? _a : false;
                 });
-                return __assign(__assign({}, state), { rows: filteredRows.map(function (row) {
+                return __assign(__assign({}, state), {
+                    rows: filteredRows.map(function (row) {
                         return selectedRowsById[row.id] ? __assign(__assign({}, row), { selected: selectedRowsById[row.id] }) : __assign({}, row);
-                    }), filterOn: true });
+                    }), filterOn: true
+                });
             case "SELECT_ROW":
                 stateCopy = __assign({}, state);
                 stateCopy.rows = stateCopy.rows.map(function (row) {
@@ -2752,10 +2764,10 @@ var sortDataInOrder = function (data, columns) {
     });
 };
 var makeRender = function (
-// eslint-disable-next-line
-value, 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-render, row) {
+    // eslint-disable-next-line
+    value,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    render, row) {
     return render ? function () { return render({ row: row, value: value }); } : function () { return value; };
 };
 var makeHeaderRender = function (label, render) {
@@ -2764,10 +2776,12 @@ var makeHeaderRender = function (label, render) {
 var useTable = function (columns, data, options) {
     var columnsWithSorting = useMemo(function () {
         return columns.map(function (column) {
-            return __assign(__assign({}, column), { label: column.label ? column.label : column.name, hidden: column.hidden ? column.hidden : false, sort: column.sort, sorted: {
+            return __assign(__assign({}, column), {
+                label: column.label ? column.label : column.name, hidden: column.hidden ? column.hidden : false, sort: column.sort, sorted: {
                     on: false,
                     asc: false,
-                } });
+                }
+            });
         });
     }, [columns]);
     var columnsByName = useMemo(function () { return getColumnsByName(columnsWithSorting); }, [columnsWithSorting]);
@@ -2781,14 +2795,14 @@ var useTable = function (columns, data, options) {
                 original: row,
                 cells: Object.entries(row)
                     .map(function (_a) {
-                    var column = _a[0], value = _a[1];
-                    return {
-                        hidden: columnsByName[column].hidden,
-                        field: column,
-                        value: value,
-                        render: makeRender(value, columnsByName[column].render, row),
-                    };
-                })
+                        var column = _a[0], value = _a[1];
+                        return {
+                            hidden: columnsByName[column].hidden,
+                            field: column,
+                            value: value,
+                            render: makeRender(value, columnsByName[column].render, row),
+                        };
+                    })
                     .filter(function (cell) { return !cell.hidden; }),
             };
         });
@@ -2958,28 +2972,28 @@ var getOutlineStyles = function (_a) {
 var StyledTag = styled.div(templateObject_1$m || (templateObject_1$m = __makeTemplateObject(["\n  align-items: center;\n  border-radius: 16px;\n  color: #ffffff;\n  display: inline-flex;\n  font-weight: 400;\n  white-space: nowrap;\n\n  & > svg {\n    fill: currentColor;\n  }\n\n  ", "\n\n  ", "\n  ", "\n  ", "\n  ", "\n\n  ", "\n"], ["\n  align-items: center;\n  border-radius: 16px;\n  color: #ffffff;\n  display: inline-flex;\n  font-weight: 400;\n  white-space: nowrap;\n\n  & > svg {\n    fill: currentColor;\n  }\n\n  ", "\n\n  ",
     "\n  ",
     "\n  ", "\n  ", "\n\n  ", "\n"])), function (_a) {
-    var textTransform = _a.textTransform;
-    return textTransform && "text-transform: " + textTransform + ";";
-}, variant$1({
-    prop: "scale",
-    variants: scaleVariants,
-}), variant$1({
-    variants: styleVariants,
-}), space, typography, getOutlineStyles);
+        var textTransform = _a.textTransform;
+        return textTransform && "text-transform: " + textTransform + ";";
+    }, variant$1({
+        prop: "scale",
+        variants: scaleVariants,
+    }), variant$1({
+        variants: styleVariants,
+    }), space, typography, getOutlineStyles);
 var templateObject_1$m;
 
 var Tag = function (_a) {
     var startIcon = _a.startIcon, endIcon = _a.endIcon, children = _a.children, props = __rest(_a, ["startIcon", "endIcon", "children"]);
     return (React.createElement(StyledTag, __assign({}, props),
         React.isValidElement(startIcon) &&
-            React.cloneElement(startIcon, {
-                mr: "0.5em",
-            }),
+        React.cloneElement(startIcon, {
+            mr: "0.5em",
+        }),
         children,
         React.isValidElement(endIcon) &&
-            React.cloneElement(endIcon, {
-                ml: "0.5em",
-            })));
+        React.cloneElement(endIcon, {
+            ml: "0.5em",
+        })));
 };
 Tag.defaultProps = {
     variant: "primary",
@@ -3299,75 +3313,78 @@ var useKonamiCheatCode = function (matchedCodeHandler) {
 };
 
 var baseColors = {
-    failure: "#FF4D6A", // Bright red-pink for errors
-    primary: "#0FD1FB", // Bright cyan - main brand color
-    primaryBright: "#47E3FF", // Lighter cyan for highlights
-    primaryDark: "#0098A1", // Darker cyan for depth
-    secondary: "#1CA7D4", // Medium blue-cyan
-    success: "#22DDC9", // Cyan-tinted green for success
-    warning: "#FFB23F", // Warm orange for warnings
+    failure: "#ff0600", // Red from support colors
+    primary: "#ffdc00", // Brand dark theme color
+    primaryBright: "#ffdb00", // Brand light theme color
+    primaryDark: "#f0e111", // From gradient 1
+    secondary: "#ff6326", // Pink from support colors
+    success: "#00ff00", // Green from support colors
+    warning: "#ff8200", // Orange from support colors
 };
 
 var additionalColors = {
-    binance: "#F0B90B", // Keep yellow for Binance
-    overlay: "#0A4B5B", // Dark cyan for overlays
-    gold: "#FFD700", // Keep gold
-    silver: "#B8E8F2", // Cyan-tinted silver
-    bronze: "#E7974D", // Keep bronze
+    binance: "#ffdc00", // Using brand color
+    overlay: "#000000", // Using dark primary
+    gold: "#ffdc00", // Using brand color
+    silver: "#acacac", // From gradient 2
+    bronze: "#c000ee", // From gradient 3
 };
 
-var lightColors = __assign(__assign(__assign({}, baseColors), additionalColors), { 
-    background: "#EBF8FC", // Light cyan background
-    backgroundDisabled: "#E0EEF2", // Slightly darker cyan for disabled state
-    backgroundAlt: "#FFFFFF", // Keep white for contrast
-    cardBorder: "#B8E8F2", // Light cyan border
-    contrast: "#0A4B5B", // Dark cyan for high contrast
-    dropdown: "#E5F6FA", // Very light cyan for dropdowns
-    dropdownDeep: "#D9F0F5", // Slightly darker cyan for nested dropdowns
-    invertedContrast: "#FFFFFF", // Keep white
-    input: "#E0F3F7", // Light cyan for inputs
-    inputSecondary: "#B8E8F2", // Medium cyan for secondary inputs
-    tertiary: "#F0FAFC", // Very light cyan for tertiary elements
-    text: "#0A4B5B", // Dark cyan for text
-    textDisabled: "#92C5D1", // Medium cyan for disabled text
-    textSubtle: "#4A8B9A", // Medium-dark cyan for subtle text
-    disabled: "#E0EEF2", // Light cyan for disabled elements
+var lightColors = __assign(__assign(__assign({}, baseColors), additionalColors), {
+    background: "#ffffff", // Light primary
+    backgroundDisabled: "#e7e7e5", // From gradient 1
+    backgroundAlt: "#ffffff", // Light primary
+    cardBorder: "#acacac", // From gradient 2
+    contrast: "#000000", // Dark primary
+    dropdown: "#ffffff", // Light primary
+    dropdownDeep: "#f0e111", // From gradient 1
+    invertedContrast: "#000000", // Dark primary
+    input: "#ffffff", // Light primary
+    inputSecondary: "#f0e111", // From gradient 1
+    tertiary: "#e7e7e5", // From gradient 1
+    text: "#000000", // Dark primary
+    textDisabled: "#acacac", // From gradient 2
+    textSubtle: "#000000", // Dark primary
+    disabled: "#e7e7e5", // From gradient 1
     gradients: {
-        bubblegum: "linear-gradient(139.73deg, #E5F8FF 0%, #D0F3FF 100%)", // Light cyan gradient
-        inverseBubblegum: "linear-gradient(139.73deg, #D0F3FF 0%, #E5F8FF 100%)", // Inverse light cyan
-        cardHeader: "linear-gradient(111.68deg, #F0FAFF 0%, #E5F8FF 100%)", // Subtle cyan header
-        blue: "linear-gradient(180deg, #0FD1FB 0%, #0098A1 100%)", // Primary cyan gradient
-        violet: "linear-gradient(180deg, #B8E8F2 0%, #8CD9E6 100%)", // Secondary cyan
-        violetAlt: "linear-gradient(180deg, #E0F3F7 0%, #B8E8F2 100%)", // Alternative cyan
-        gold: "linear-gradient(180deg, #FFD800 0%, #FDAB32 100%)", // Keep gold for alerts/warnings
-    } });
-var darkColors = __assign(__assign(__assign({}, baseColors), additionalColors), { 
-    secondary: "#0FD1FB", // Bright cyan for secondary elements
-    background: "#051B2C", // Very dark blue-cyan
-    backgroundDisabled: "#0A2A3D", // Slightly lighter dark blue
-    backgroundAlt: "#072435", // Dark blue-cyan alternative
-    cardBorder: "#0C3B54", // Medium-dark cyan border
-    contrast: "#FFFFFF", // Keep white for contrast
-    dropdown: "#062331", // Dark blue-cyan for dropdowns
-    dropdownDeep: "#041824", // Deeper dark blue for nested dropdowns
-    invertedContrast: "#051B2C", // Very dark blue-cyan
-    input: "#0A2A3D", // Dark blue input background
-    inputSecondary: "#072435", // Slightly lighter input background
-    primaryDark: "#0098A1", // Keep existing cyan
-    tertiary: "#0C3B54", // Medium-dark cyan
-    text: "#E5F6FA", // Very light cyan for text
-    textDisabled: "#3A6F85", // Muted cyan for disabled text
-    textSubtle: "#7CB0C7", // Light cyan for subtle text
-    disabled: "#0A2A3D", // Dark blue for disabled elements
+        bubblegum: "linear-gradient(139.73deg, #f0e111 0%, #e7e7e5 100%)", // Gradient 1
+        inverseBubblegum: "linear-gradient(139.73deg, #e7e7e5 0%, #f0e111 100%)", // Inverse gradient 1
+        cardHeader: "linear-gradient(139.73deg, #f0e111 0%, #ffdc00 47%, #ff8200 100%)", // Light theme gradient
+        blue: "linear-gradient(139.73deg, #00dac5 0%, #00ff00 47%, #ffdc00 100%)", // Gradient 4
+        violet: "linear-gradient(139.73deg, #c000ee 0%, #3e00ff 47%, #00cfdd 100%)", // Gradient 3
+        violetAlt: "linear-gradient(139.73deg, #000000 0%, #acacac 47%, #ff6326 100%)", // Gradient 2
+        gold: "linear-gradient(139.73deg, #ffdc00 0%, #ff8200 100%)", // Brand colors gradient
+    }
+});
+
+var darkColors = __assign(__assign(__assign({}, baseColors), additionalColors), {
+    secondary: "#ff6326", // Pink from support colors
+    background: "#000000", // Dark primary
+    backgroundDisabled: "#acacac", // From gradient 2
+    backgroundAlt: "#000000", // Dark primary
+    cardBorder: "#acacac", // From gradient 2
+    contrast: "#ffffff", // Light primary
+    dropdown: "#000000", // Dark primary
+    dropdownDeep: "#000000", // Dark primary
+    invertedContrast: "#ffffff", // Light primary
+    input: "#000000", // Dark primary
+    inputSecondary: "#efefef", // Dark primary
+    primaryDark: "#ffdc00", // Brand dark theme color
+    tertiary: "#acacac", // From gradient 2
+    text: "#000000", // Light primary
+    textDisabled: "#555555", // From gradient 2
+    textSubtle: "#f7ff00", // Light primary
+    disabled: "#acacac", // From gradient 2
     gradients: {
-        bubblegum: "linear-gradient(139.73deg, #0A2E44 0%, #051B2C 100%)", // Deep ocean gradient
-        inverseBubblegum: "linear-gradient(139.73deg, #051B2C 0%, #0A2E44 100%)", // Inverse deep ocean
-        cardHeader: "linear-gradient(166.77deg, #0C3B54 0%, #072435 100%)", // Dark cyan header
-        blue: "linear-gradient(180deg, #0FD1FB 0%, #0098A1 100%)", // Bright cyan gradient
-        violet: "linear-gradient(180deg, #0A4B5B 0%, #083744 100%)", // Deep cyan
-        violetAlt: "linear-gradient(180deg, #0C3B54 0%, #062331 100%)", // Alternative deep cyan
-        gold: "linear-gradient(180deg, #FFD800 0%, #FDAB32 100%)", // Keep gold for alerts/warnings
-    } });
+        bubblegum: "linear-gradient(139.73deg, #000000 0%, #acacac 47%, #ff6326 100%)", // Gradient 2
+        inverseBubblegum: "linear-gradient(139.73deg, #ff6326 0%, #acacac 47%, #000000 100%)", // Inverse gradient 2
+        cardHeader: "linear-gradient(139.73deg, #000000 0%, #acacac 47%, #ff6326 100%)", // Dark theme gradient
+        blue: "linear-gradient(139.73deg, #c000ee 0%, #3e00ff 47%, #00cfdd 100%)", // Gradient 3
+        violet: "linear-gradient(139.73deg, #000000 0%, #acacac 47%, #ff6326 100%)", // Gradient 2
+        violetAlt: "linear-gradient(139.73deg, #c000ee 0%, #00cfdd 100%)", // Simplified gradient 3
+        gold: "linear-gradient(139.73deg, #ffdc00 0%, #ff8200 100%)", // Brand colors gradient
+    }
+});
 
 var light$7 = {
     background: lightColors.backgroundAlt,
@@ -3717,7 +3734,8 @@ var ModalProvider = function (_a) {
             handleDismiss();
         }
     };
-    return (React.createElement(Context.Provider, { value: {
+    return (React.createElement(Context.Provider, {
+        value: {
             isOpen: isOpen,
             nodeId: nodeId,
             modalNode: modalNode,
@@ -3725,13 +3743,14 @@ var ModalProvider = function (_a) {
             onPresent: handlePresent,
             onDismiss: handleDismiss,
             setCloseOnOverlayClick: setCloseOnOverlayClick,
-        } },
+        }
+    },
         isOpen && (React.createElement(ModalWrapper, null,
             React.createElement(Overlay, { show: true, onClick: handleOverlayDismiss }),
             React.isValidElement(modalNode) &&
-                React.cloneElement(modalNode, {
-                    onDismiss: handleDismiss,
-                }))),
+            React.cloneElement(modalNode, {
+                onDismiss: handleDismiss,
+            }))),
         children));
 };
 var templateObject_1$i;
@@ -3995,7 +4014,7 @@ var Logo = function (_a) {
         React.createElement(LogoWithText, { className: "desktop-icon", isDark: isDark })));
     return (React.createElement(Flex, null,
         React.createElement(MenuButton, { "aria-label": "Toggle menu", onClick: togglePush, mr: "24px" }, isPushed ? (React.createElement(Icon$s, { width: "24px", color: "textSubtle" })) : (React.createElement(Icon$t, { width: "24px", color: "textSubtle" }))),
-        isAbsoluteUrl ? (React.createElement(StyledLink, { as: "a", href: href, "aria-label": "Tidaldex home page" }, innerLogo)) : (React.createElement(StyledLink, { to: href, "aria-label": "TidalDex home page" }, innerLogo))));
+        isAbsoluteUrl ? (React.createElement(StyledLink, { as: "a", href: href, "aria-label": "CornHubhome page" }, innerLogo)) : (React.createElement(StyledLink, { to: href, "aria-label": "CornHub home page" }, innerLogo))));
 };
 var Logo$1 = React.memo(Logo, function (prev, next) { return prev.isPushed === next.isPushed && prev.isDark === next.isDark; });
 var templateObject_1$g, templateObject_2$8;
@@ -4256,10 +4275,12 @@ var PanelBody = function (_a) {
             var itemsMatchIndex = entry.items.findIndex(function (item) { return item.href === location.pathname; });
             var initialOpenState = entry.initialOpenState === true ? entry.initialOpenState : itemsMatchIndex >= 0;
             return (React.createElement(Accordion, { key: entry.label, isPushed: isPushed, pushNav: pushNav, icon: iconElement, label: entry.label, status: entry.status, initialOpenState: initialOpenState, className: calloutClass, isActive: entry.items.some(function (item) { return item.href === location.pathname; }) }, isPushed &&
-                entry.items.map(function (item) { return (React.createElement(MenuEntry, { key: item.href, secondary: true, isActive: item.href === location.pathname, onClick: handleClick },
-                    React.createElement(MenuLink, { href: item.href },
-                        React.createElement(LinkLabelMemo, { isPushed: isPushed }, item.label),
-                        item.status && (React.createElement(LinkStatus, { color: item.status.color, fontSize: "14px" }, item.status.text))))); })));
+                entry.items.map(function (item) {
+                    return (React.createElement(MenuEntry, { key: item.href, secondary: true, isActive: item.href === location.pathname, onClick: handleClick },
+                        React.createElement(MenuLink, { href: item.href },
+                            React.createElement(LinkLabelMemo, { isPushed: isPushed }, item.label),
+                            item.status && (React.createElement(LinkStatus, { color: item.status.color, fontSize: "14px" }, item.status.text)))));
+                })));
         }
         return (React.createElement(MenuEntry, { key: entry.label, isActive: entry.href === location.pathname, className: calloutClass },
             React.createElement(MenuLink, { href: entry.href, onClick: handleClick },
@@ -4293,16 +4314,18 @@ var ThemeSwitcher = function (_a) {
 var ThemeSwitcher$1 = React.memo(ThemeSwitcher, function (prev, next) { return prev.isDark === next.isDark; });
 
 var Icons = IconModule;
-var SocialLinks = function () { return (React.createElement(Flex, null, socials.map(function (social, index) {
-    var Icon = Icons[social.icon];
-    var iconProps = { width: "24px", color: "textSubtle", style: { cursor: "pointer" } };
-    var mr = index < socials.length - 1 ? "5px" : 0;
-    if (social.items) {
-        return (React.createElement(Dropdown, { key: social.label, position: "top", target: React.createElement(Icon, __assign({}, iconProps, { mr: mr })) }, social.items.map(function (item) { return (React.createElement(Link, { external: true, key: item.label, href: item.href, "aria-label": item.label, color: "textSubtle" }, item.label)); })));
-    }
-    return (React.createElement(Link, { external: true, key: social.label, href: social.href, "aria-label": social.label, mr: mr },
-        React.createElement(Icon, __assign({}, iconProps))));
-}))); };
+var SocialLinks = function () {
+    return (React.createElement(Flex, null, socials.map(function (social, index) {
+        var Icon = Icons[social.icon];
+        var iconProps = { width: "24px", color: "textSubtle", style: { cursor: "pointer" } };
+        var mr = index < socials.length - 1 ? "5px" : 0;
+        if (social.items) {
+            return (React.createElement(Dropdown, { key: social.label, position: "top", target: React.createElement(Icon, __assign({}, iconProps, { mr: mr })) }, social.items.map(function (item) { return (React.createElement(Link, { external: true, key: item.label, href: item.href, "aria-label": item.label, color: "textSubtle" }, item.label)); })));
+        }
+        return (React.createElement(Link, { external: true, key: social.label, href: social.href, "aria-label": social.label, mr: mr },
+            React.createElement(Icon, __assign({}, iconProps))));
+    })));
+};
 var SocialLinks$1 = React.memo(SocialLinks, function () { return true; });
 
 var Container = styled.div(templateObject_1$b || (templateObject_1$b = __makeTemplateObject(["\n  flex: none;\n  padding: 8px 4px;\n  background-color: ", ";\n  border-top: solid 2px rgba(133, 133, 133, 0.1);\n"], ["\n  flex: none;\n  padding: 8px 4px;\n  background-color: ", ";\n  border-top: solid 2px rgba(133, 133, 133, 0.1);\n"])), function (_a) {
@@ -4425,16 +4448,16 @@ var Menu$1 = function (_a) {
     // Find the home link if provided
     var homeLink = links.find(function (link) { return link.label === "Home"; });
     return (React.createElement(Wrapper, null,
-        React.createElement(StyledNav, { showMenu: showMenu },
+        React.createElement(StyledNav, { showMenu: showMenu, className: "menu-styled-nav" },
             React.createElement(Logo$1, { isPushed: isPushed, togglePush: function () { return setIsPushed(function (prevState) { return !prevState; }); }, isDark: isDark, href: (_b = homeLink === null || homeLink === void 0 ? void 0 : homeLink.href) !== null && _b !== void 0 ? _b : "/" }),
             React.createElement(Flex, null,
                 globalMenu,
                 " ",
                 userMenu)),
-        React.createElement(BodyWrapper, null,
-            React.createElement(Panel, { isPushed: isPushed, isMobile: isSmallerScreen, showMenu: showMenu, isDark: isDark, toggleTheme: toggleTheme, langs: langs, setLang: setLang, currentLang: currentLang, cakePriceUsd: cakePriceUsd, pushNav: setIsPushed, links: links }),
-            React.createElement(Inner, { isPushed: isPushed, showMenu: showMenu }, children),
-            React.createElement(MobileOnlyOverlay, { show: isPushed, onClick: function () { return setIsPushed(false); }, role: "presentation" }))));
+        React.createElement(BodyWrapper, { className: "menu-body-wrapper" },
+            React.createElement(Panel, { className: "menu-panel", isPushed: isPushed, isMobile: isSmallerScreen, showMenu: showMenu, isDark: isDark, toggleTheme: toggleTheme, langs: langs, setLang: setLang, currentLang: currentLang, cakePriceUsd: cakePriceUsd, pushNav: setIsPushed, links: links }),
+            React.createElement(Inner, { className: "menu-inner", isPushed: isPushed, showMenu: showMenu }, children),
+            React.createElement(MobileOnlyOverlay, { className: "menu-mobile-overlay", show: isPushed, onClick: function () { return setIsPushed(false); }, role: "presentation" }))));
 };
 var templateObject_1$9, templateObject_2$4, templateObject_3$1, templateObject_4, templateObject_5;
 
@@ -4453,14 +4476,22 @@ var MenuIconWrapper = styled.div(templateObject_1$8 || (templateObject_1$8 = __m
     return theme.colors[borderColor];
 });
 var ProfileIcon = styled(Image)(templateObject_2$3 || (templateObject_2$3 = __makeTemplateObject(["\n  left: 0;\n  position: absolute;\n  top: -4px;\n  z-index: 102;\n\n  & > img {\n    border-radius: 50%;\n  }\n"], ["\n  left: 0;\n  position: absolute;\n  top: -4px;\n  z-index: 102;\n\n  & > img {\n    border-radius: 50%;\n  }\n"])));
-var NoProfileMenuIcon = function () { return (React.createElement(MenuIconWrapper, { borderColor: "primary" },
-    React.createElement(Icon$z, { color: "primary", width: "24px" }))); };
-var PendingMenuIcon = function () { return (React.createElement(MenuIconWrapper, { borderColor: "secondary" },
-    React.createElement(Icon$_, { color: "secondary", width: "24px", spin: true }))); };
-var WarningMenuIcon = function () { return (React.createElement(MenuIconWrapper, { borderColor: "warning" },
-    React.createElement(Icon$C, { color: "warning", width: "24px" }))); };
-var DangerMenuIcon = function () { return (React.createElement(MenuIconWrapper, { borderColor: "failure" },
-    React.createElement(Icon$C, { color: "failure", width: "24px" }))); };
+var NoProfileMenuIcon = function () {
+    return (React.createElement(MenuIconWrapper, { borderColor: "primary" },
+        React.createElement(Icon$z, { color: "primary", width: "24px" })));
+};
+var PendingMenuIcon = function () {
+    return (React.createElement(MenuIconWrapper, { borderColor: "secondary" },
+        React.createElement(Icon$_, { color: "secondary", width: "24px", spin: true })));
+};
+var WarningMenuIcon = function () {
+    return (React.createElement(MenuIconWrapper, { borderColor: "warning" },
+        React.createElement(Icon$C, { color: "warning", width: "24px" })));
+};
+var DangerMenuIcon = function () {
+    return (React.createElement(MenuIconWrapper, { borderColor: "failure" },
+        React.createElement(Icon$C, { color: "failure", width: "24px" })));
+};
 var MenuIcon = function (_a) {
     var avatarSrc = _a.avatarSrc, variant = _a.variant;
     if (variant === variants.DANGER) {
@@ -4508,16 +4539,16 @@ var LabelText = styled.div(templateObject_2$1 || (templateObject_2$1 = __makeTem
 });
 var Menu = styled.div(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  background-color: ", ";\n  border: 1px solid ", ";\n  border-radius: 16px;\n  padding-bottom: 4px;\n  padding-top: 4px;\n  pointer-events: auto;\n  width: 280px;\n  visibility: visible;\n  z-index: 1001;\n\n  ", "\n\n  ", ":first-child {\n    border-radius: 8px 8px 0 0;\n  }\n\n  ", ":last-child {\n    border-radius: 0 0 8px 8px;\n  }\n"], ["\n  background-color: ", ";\n  border: 1px solid ", ";\n  border-radius: 16px;\n  padding-bottom: 4px;\n  padding-top: 4px;\n  pointer-events: auto;\n  width: 280px;\n  visibility: visible;\n  z-index: 1001;\n\n  ",
     "\n\n  ", ":first-child {\n    border-radius: 8px 8px 0 0;\n  }\n\n  ", ":last-child {\n    border-radius: 0 0 8px 8px;\n  }\n"])), function (_a) {
-    var theme = _a.theme;
-    return theme.card.background;
-}, function (_a) {
-    var theme = _a.theme;
-    return theme.colors.cardBorder;
-}, function (_a) {
-    var isOpen = _a.isOpen;
-    return !isOpen &&
-        "\n    pointer-events: none;\n    visibility: hidden;\n  ";
-}, UserMenuItem, UserMenuItem);
+        var theme = _a.theme;
+        return theme.card.background;
+    }, function (_a) {
+        var theme = _a.theme;
+        return theme.colors.cardBorder;
+    }, function (_a) {
+        var isOpen = _a.isOpen;
+        return !isOpen &&
+            "\n    pointer-events: none;\n    visibility: hidden;\n  ";
+    }, UserMenuItem, UserMenuItem);
 var UserMenu = function (_a) {
     var account = _a.account, text = _a.text, avatarSrc = _a.avatarSrc, _b = _a.variant, variant = _b === void 0 ? variants.DEFAULT : _b, children = _a.children, props = __rest(_a, ["account", "text", "avatarSrc", "variant", "children"]);
     var _c = useState(false), isOpen = _c[0], setIsOpen = _c[1];
@@ -4774,7 +4805,8 @@ var MoreWalletCard = function (props) {
 var WalletCard = function (_a) {
     var login = _a.login, walletConfig = _a.walletConfig, onDismiss = _a.onDismiss;
     var title = walletConfig.title, Icon = walletConfig.icon;
-    return (React.createElement(WalletButton, { variant: "tertiary", onClick: function () {
+    return (React.createElement(WalletButton, {
+        variant: "tertiary", onClick: function () {
             var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             // Since iOS does not support Trust Wallet we fall back to WalletConnect
             if (walletConfig.title === "Trust Wallet" && isIOS) {
@@ -4786,7 +4818,8 @@ var WalletCard = function (_a) {
             localStorage.setItem(walletLocalStorageKey, walletConfig.title);
             localStorage.setItem(connectorLocalStorageKey, walletConfig.connectorId);
             onDismiss();
-        }, id: "wallet-connect-" + title.toLocaleLowerCase() },
+        }, id: "wallet-connect-" + title.toLocaleLowerCase()
+    },
         React.createElement(Icon, { width: "40px", mb: "8px" }),
         React.createElement(Text, { fontSize: "14px" }, title)));
 };
@@ -4830,8 +4863,10 @@ var ConnectModal = function (_a) {
         React.createElement(ModalBody, { width: ["320px", null, "340px"] },
             React.createElement(WalletWrapper, { py: "24px", maxHeight: "453px", overflowY: "auto" },
                 React.createElement(Grid, { gridTemplateColumns: "1fr 1fr" },
-                    displayListConfig.map(function (wallet) { return (React.createElement(Box, { key: wallet.title },
-                        React.createElement(WalletCard, { walletConfig: wallet, login: login, onDismiss: onDismiss }))); }),
+                    displayListConfig.map(function (wallet) {
+                        return (React.createElement(Box, { key: wallet.title },
+                            React.createElement(WalletCard, { walletConfig: wallet, login: login, onDismiss: onDismiss })));
+                    }),
                     !showMore && React.createElement(MoreWalletCard, { onClick: function () { return setShowMore(true); } }))),
             React.createElement(Box, { p: "24px" },
                 React.createElement(Text, { textAlign: "center", color: "textSubtle", as: "p", mb: "16px" }, "Haven't got a crypto wallet yet?"),
@@ -4870,7 +4905,8 @@ var CopyToClipboard = function (_a) {
             setIsTooltipDisplayed(false);
         }, 1000);
     }
-    return (React.createElement(StyleButton, __assign({ small: true, bold: true, onClick: function () {
+    return (React.createElement(StyleButton, __assign({
+        small: true, bold: true, onClick: function () {
             if (navigator.clipboard && navigator.permissions) {
                 navigator.clipboard.writeText(toCopy).then(function () { return displayTooltip(); });
             }
@@ -4878,7 +4914,8 @@ var CopyToClipboard = function (_a) {
                 copyToClipboardWithCommand(toCopy);
                 displayTooltip();
             }
-        } }, props),
+        }
+    }, props),
         children,
         React.createElement(Icon$1D, { width: "20px", color: "primary", ml: "4px" }),
         React.createElement(Tooltip, { isTooltipDisplayed: isTooltipDisplayed }, "Copied")));
@@ -4893,11 +4930,13 @@ var AccountModal = function (_a) {
             React.createElement(LinkExternal, { small: true, href: "https://bscscan.com/address/" + account, mr: "16px" }, "View on BscScan"),
             React.createElement(CopyToClipboard, { toCopy: account }, "Copy Address")),
         React.createElement(Flex, { justifyContent: "center" },
-            React.createElement(Button, { scale: "sm", variant: "secondary", onClick: function () {
+            React.createElement(Button, {
+                scale: "sm", variant: "secondary", onClick: function () {
                     logout();
                     window.localStorage.removeItem(connectorLocalStorageKey);
                     onDismiss();
-                } }, "Logout"))));
+                }
+            }, "Logout"))));
 };
 
 var useWalletModal = function (login, logout, account) {
@@ -4916,3 +4955,4 @@ var ResetCSS = createGlobalStyle(templateObject_1 || (templateObject_1 = __makeT
 var templateObject_1;
 
 export { Icon$25 as AddIcon, Alert, Icon$24 as ArrowBackIcon, Icon$23 as ArrowDownIcon, Icon$22 as ArrowDropDownIcon, Icon$21 as ArrowDropUpIcon, Icon$20 as ArrowFirstIcon, Icon$1$ as ArrowForwardIcon, Icon$1_ as ArrowLastIcon, Icon$1Z as ArrowUpIcon, Icon$1Y as AutoRenewIcon, BackgroundImage, BalanceInput, GridLayout$1 as BaseLayout, Icon$1W as BinanceChainIcon, Icon$1X as BinanceIcon, Icon$27 as BlockIcon, Icon$1V as BnbUsdtPairTokenIcon, Box, Breadcrumbs, Icon$1U as BunnyCardsIcon, Icon$1T as BunnyPlaceholderIcon, Button, ButtonMenu$1 as ButtonMenu, ButtonMenuItem, Icon$1Q as CalculateIcon, Card, CardBody, CardFooter, CardHeader, CardRibbon, Icon$1R as CardViewIcon, Icon$1S as Cards, GridLayout as CardsLayout, Icon$1O as ChartIcon, Checkbox, Icon$1M as CheckmarkCircleFillIcon, Icon$29 as CheckmarkCircleIcon, Icon$1N as CheckmarkIcon, Icon$1L as ChevronDownIcon, Icon$1K as ChevronLeftIcon, Icon$1J as ChevronRightIcon, Icon$1I as ChevronUpIcon, Icon$1P as CircleOutlineIcon, Icon$1H as CloseIcon, Icon$1G as CogIcon, Icon$1F as Coin98Icon, Icon$1E as CommunityIcon, ConnectorNames, Icon$1D as CopyIcon, Icon$1C as CrownIcon, Icon$1B as CurrencyIcon, Dropdown, Icon$1A as EllipsisIcon, Icon$28 as ErrorIcon, ExpandableButton, ExpandableLabel, FallingBunnies, Flex, Grid, Heading, Icon$1z as HelpIcon, Icon$1y as HistoryIcon, IconButton, Image, Icon$26 as InfoIcon, Input$1 as Input, InputGroup, Icon$1w as LanguageCurrencyIcon, Icon$1x as LanguageIcon, Icon$1v as LaurelLeftIcon, Icon$1u as LaurelRightIcon, Link, LinkExternal, Icon$1t as ListViewIcon, Icon$1s as LoginIcon, Icon$1r as LogoIcon, Icon$1q as LogoRoundIcon, Icon$1o as LogoutIcon, Icon$1p as MathWalletIcon, Icon$1n as MedalBronzeIcon, Icon$1m as MedalGoldIcon, Icon$1l as MedalPurpleIcon, Icon$1k as MedalSilverIcon, Icon$1j as MedalTealIcon, Menu$1 as Menu, Message, Icon$1i as MetamaskIcon, Icon$1h as MinusIcon, Modal, ModalBackButton, ModalBody, ModalCloseButton, ModalContainer, ModalHeader, ModalProvider, ModalTitle, Icon$1g as MoreHorizontalIcon, Icon$1f as MoreVerticalIcon, Icon$1e as NoProfileAvatarIcon, NotificationDot, Icon$1d as OpenNewIcon, Overlay, Icon$1a as PancakeRoundIcon, PancakeToggle, Icon$1c as PancakesIcon, Icon$1b as PencilIcon, Icon$18 as PlayCircleOutlineIcon, Icon$19 as PocketWatchIcon, Icon$17 as PredictionsIcon, Icon$11 as PresentCheckIcon, Icon$$ as PresentNoneIcon, Icon$10 as PresentWonIcon, Icon$16 as PrizeIcon, ProfileAvatar, Progress, Icon$12 as ProgressBunny, Icon$15 as ProposalIcon, Radio, Icon$_ as RefreshIcon, Icon$14 as RemoveIcon, ResetCSS, Icon$Z as SafePalIcon, Icon$Y as SearchIcon, Skeleton, Slider, Icon$X as SmallDotIcon, Spinner, Icon$W as StarFillIcon, Icon$V as StarLineIcon, Step, Stepper, SubMenu, SubMenuItem, Svg, Icon$U as SwapIcon, Icon$T as SwapVertIcon, Icon$S as SyncAltIcon, Tab, ButtonMenu as TabMenu, Table, Tag, Td, Icon$R as TeamPlayerIcon, Icon$Q as TestnetIcon, Text, Th, Icon$P as Ticket, Icon$O as TicketFillIcon, Icon$N as TicketRound, Icon$M as TimerIcon, ToastContainer, Toggle, TokenImage, TokenPairImage, Icon$L as TokenPocketIcon, TooltipText, Icon$K as TrophyGoldIcon, Icon$J as TrustWalletIcon, Icon$I as TuneIcon, UserMenu, UserMenuDivider, UserMenuItem, Icon$13 as VerifiedIcon, Icon$H as VisibilityOff, Icon$G as VisibilityOn, Icon$F as VolumeOffIcon, Icon$E as VolumeUpIcon, Icon$D as VoteIcon, Icon$y as WaitIcon, Icon$B as WalletConnectIcon, Icon$z as WalletFilledIcon, Icon$A as WalletIcon, Icon$C as WarningIcon, variants$5 as alertVariants, byTextAscending, byTextDescending, connectorLocalStorageKey, darkTheme as dark, darkColors, lightTheme as light, lightColors, makeRender, links as menuConfig, status as menuStatus, types as toastTypes, useKonamiCheatCode, useMatchBreakpoints, useModal, useParticleBurst, useTable, useTooltip, useWalletModal };
+

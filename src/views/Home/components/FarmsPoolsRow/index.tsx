@@ -78,7 +78,7 @@ const FarmsPoolsRow = () => {
               clearInterval(timer.current)
             }}
           >
-            <SwapVertIcon height="24px" width="24px" color="#0097e1" />
+            <SwapVertIcon height="24px" width="24px" color="#e18700" />
           </IconButton>
         </Flex>
         <Box height={['240px', null, '80px']}>

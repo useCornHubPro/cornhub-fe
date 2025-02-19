@@ -7,6 +7,7 @@ import ConnectWalletButton from 'components/ConnectWalletButton'
 import useTheme from 'hooks/useTheme'
 import { SlideSvgDark, SlideSvgLight } from './SlideSvg'
 import CompositeImage, { getSrcSet, CompositeImageProps } from './CompositeImage'
+import { useGlitch } from 'react-powerglitch'
 
 const flyingAnim = () => keyframes`
   from {
@@ -90,7 +91,6 @@ const Hero = () => {
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const { theme } = useTheme()
-
   return (
     <>
       <BgWrapper>

@@ -62,7 +62,7 @@ const TopFarmPool: React.FC<TopFarmPoolProps> = ({ title, percentage, index, vis
           <Skeleton width={80} height={12} mb="8px" />
         )}
         {percentage ? (
-          <Balance lineHeight="1.1" fontSize="16px" color="#0097e1" bold unit="%" value={percentage} />
+          <Balance lineHeight="1.1" fontSize="16px" color="#e18700" bold unit="%" value={percentage} />
         ) : (
           <Skeleton width={60} height={16} />
         )}

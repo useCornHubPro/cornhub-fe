@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 import { Box } from '@pancakeswap/uikit'
+import { useGlitch } from 'react-powerglitch'
 
 const floatingAnim = (x: string, y: string) => keyframes`
   from {
@@ -85,6 +86,7 @@ export const getSrcSet = (base: string, imageSrc: string) => {
 }
 
 const CompositeImage: React.FC<ComponentProps> = ({ path, attributes, maxHeight = '512px' }) => {
+  const glitch = useGlitch()
   return (
     <Wrapper maxHeight={maxHeight}>
       <DummyImg
@@ -94,7 +96,12 @@ const CompositeImage: React.FC<ComponentProps> = ({ path, attributes, maxHeight 
       />
       {attributes.map((image) => (
         <ImageWrapper key={image.src}>
-          <img src={getImageUrl(path, image.src)} srcSet={getSrcSet(path, image.src)} alt={image.alt} />
+          <img
+            src={getImageUrl(path, image.src)}
+            srcSet={getSrcSet(path, image.src)}
+            alt={image.alt}
+            ref={glitch.ref}
+          />
         </ImageWrapper>
       ))}
     </Wrapper>

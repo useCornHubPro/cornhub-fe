@@ -4,6 +4,7 @@ import PageSection from 'components/PageSection'
 import { useWeb3React } from '@web3-react/core'
 import useTheme from 'hooks/useTheme'
 import Container from 'components/Layout/Container'
+import { useGlitch } from 'react-powerglitch'
 import Hero from './components/Hero'
 import { swapSectionData, earnSectionData, cakeSectionData } from './components/SalesSection/data'
 import MetricsSection from './components/MetricsSection'
@@ -45,16 +46,14 @@ const Home: React.FC = () => {
   const { account } = useWeb3React()
 
   const HomeSectionContainerStyles = { margin: '0', width: '100%', maxWidth: '98%' }
-
+  const glitch = useGlitch()
   return (
     <>
       {/* : 'linear-gradient(180deg, #6FB6F1 0%)' */}
 
       <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
-        background={
-          theme.isDark ? 'linear-gradient(180deg, #6FB6F1 0%)' : 'linear-gradient(180deg, #fff 0%, #fff 100%)'
-        }
+        background="url(images/backgrounds/bg-btc-field.png)"
         index={2}
         hasCurvedDivider={false}
       >
@@ -75,11 +74,10 @@ const Home: React.FC = () => {
 
       <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
-        // background="linear-gradient(180deg, #7645D9 0%, #5121B1 100%)"
         background={
           theme.isDark
-            ? 'linear-gradient(180deg, #1f2022 0%, #1f2022 100%)'
-            : 'linear-gradient(180deg, #1f2022  0%, #1f2022  100%)'
+            ? 'linear-gradient(139.73deg, #c000ee 0%, #3e00ff 47%, #00cfdd 100%)'
+            : 'linear-gradient(139.73deg, #00dac5 0%, #00ff00 47%, #ffdc00 100%)'
         }
         index={2}
         hasCurvedDivider={false}

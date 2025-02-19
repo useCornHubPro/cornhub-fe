@@ -14731,6 +14731,11 @@ pouchdb@7.3.0:
     uuid "8.3.2"
     vuvuzela "1.0.3"
 
+powerglitch@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/powerglitch/-/powerglitch-2.4.0.tgz#6a6941d9baeadc7bf566d4f4fa8859d34ce9853c"
+  integrity sha512-O/WgCJ2GthDfKanl6YDUn7FHWa9GOj8R7UPTX6cwGbl0R+FTiQtba0zuVOIviydr6cOIgNqvz+8hAhvyn7FtBw==
+
 preact@10.4.1:
   version "10.4.1"
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.4.1.tgz#9b3ba020547673a231c6cf16f0fbaef0e8863431"
@@ -15236,6 +15241,13 @@ react-popper@^2.2.5, react-popper@^2.3.0:
   dependencies:
     react-fast-compare "^3.0.1"
     warning "^4.0.2"
+
+react-powerglitch@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-powerglitch/-/react-powerglitch-1.1.0.tgz#d9c94c30db809d4db72d9c991d51de083c680ffd"
+  integrity sha512-ueYw9dZFszBnchxbTOBJunvoWhVDoValhjDBjuZTXl3Hnj3DdwykcrS5Hdz4HDapnjveERMWeQo78OS5hmwF9A==
+  dependencies:
+    powerglitch "^2.4.0"
 
 react-redux@^7.2.4:
   version "7.2.9"

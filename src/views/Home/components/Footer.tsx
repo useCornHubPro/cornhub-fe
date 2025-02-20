@@ -16,6 +16,8 @@ const BgWrapper = styled.div`
   top: 0px;
   left: 0px;
   background-image: url('images/backgrounds/bg-man-light.png');
+  background-size: cover;
+  background-position: center top;
 `
 
 const StyledSunburst = styled(SunburstSvg)`

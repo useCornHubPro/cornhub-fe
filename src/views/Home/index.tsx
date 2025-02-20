@@ -45,7 +45,13 @@ const Home: React.FC = () => {
   const { theme } = useTheme()
   const { account } = useWeb3React()
 
-  const HomeSectionContainerStyles = { margin: '0', width: '100%', maxWidth: '98%' }
+  const HomeSectionContainerStyles = {
+    margin: '0',
+    width: '100%',
+    maxWidth: '98%',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center top',
+  }
   const glitch = useGlitch()
   return (
     <>
